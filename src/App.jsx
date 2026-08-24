@@ -20,7 +20,6 @@ export default function App() {
   const [showRecruiterModal, setShowRecruiterModal] = useState(false);
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [showSecurityModal, setShowSecurityModal] = useState(false);
-  const [showApiModal, setShowApiModal] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [toastMsg, setToastMsg] = useState(null);
   
@@ -4924,7 +4923,6 @@ ${resumeData.education}
                 <div className="flex items-center gap-4">
                   <span onClick={() => setShowSecurityModal(true)} className="hover:text-slate-300 cursor-pointer">Security Protocol</span>
                   <span onClick={() => setShowRecruiterModal(true)} className="hover:text-slate-300 cursor-pointer">Recruiter Services</span>
-                  <span onClick={() => setShowApiModal(true)} className="hover:text-slate-300 cursor-pointer">API Integration</span>
                 </div>
               </div>
             </footer>
@@ -5185,87 +5183,6 @@ ${resumeData.education}
         )}
       </AnimatePresence>
 
-      {/* API Integration Modal */}
-      <AnimatePresence>
-        {showApiModal && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 bg-[#02000c]/98 backdrop-blur-2xl overflow-y-auto flex flex-col p-6 sm:p-12 animate-fade-in"
-          >
-            <div className="absolute top-[-10%] left-[30%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-[-10%] right-[20%] w-[400px] h-[400px] bg-emerald-600/10 rounded-full blur-[100px] pointer-events-none" />
-
-            <div className="w-full max-w-3xl mx-auto flex items-center justify-between border-b border-white/10 pb-6 mb-8 shrink-0">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 flex items-center justify-center shadow-lg">
-                  <Globe className="w-5 h-5" />
-                </div>
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">Multi-Tier Live API Integrations</h2>
-                  <p className="text-xs text-slate-400 font-medium">Bespoke TalentForge API Schema and Communication Mapping</p>
-                </div>
-              </div>
-              <button 
-                onClick={() => setShowApiModal(false)}
-                className="glass-button px-5 py-2.5 rounded-xl text-xs font-bold border border-cyan-500/40 text-cyan-400 hover:text-white shrink-0 shadow-lg cursor-pointer"
-              >
-                Close
-              </button>
-            </div>
-
-            <div className="w-full max-w-3xl mx-auto flex-grow flex flex-col gap-6">
-              <div className="glass-panel rounded-3xl p-6 border border-white/5 flex flex-col gap-6">
-                <div className="flex gap-4 items-start border-b border-white/5 pb-4">
-                  <span className="text-2xl">🤖</span>
-                  <div>
-                    <h3 className="text-sm font-bold text-white mb-1">Google Gemini API Gateway</h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      Leverages the `google-generativeai` package to analyze developer profiles, provide context-aware suggestions in our Rewrite Lab, and run the real-time Mock Interview tutor. If missing the key, the system activates offline simulations.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 items-start border-b border-white/5 pb-4">
-                  <span className="text-2xl">💼</span>
-                  <div>
-                    <h3 className="text-sm font-bold text-white mb-1">Himalayas Remote Jobs API</h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      Fetches active developer vacancies from himalayas.app. These listings are dynamically mapped, parsed for keywords, and formatted into clean JSON records to populate visual application pipelines and calendars.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 items-start border-b border-white/5 pb-4">
-                  <span className="text-2xl">🕸️</span>
-                  <div>
-                    <h3 className="text-sm font-bold text-white mb-1">Jooble Job Board Aggregator</h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      Communicates with Jooble's developer api index. Enables search triggers by target region (e.g. US, IN, Remote) and programming language keywords directly from the Dashboard.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 items-start">
-                  <span className="text-2xl">🔌</span>
-                  <div>
-                    <h3 className="text-sm font-bold text-white mb-1">Internal Flask API Endpoints</h3>
-                    <p className="text-xs text-slate-400 leading-relaxed">
-                      Binds frontend React triggers on Port 3000 to backend python routes on Port 5000: `/api/analyze`, `/api/portfolio`, `/api/interview`, and `/health`. Designed with full CORS mapping for secure localhost handshakes.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-4 bg-white/[0.01] border border-dashed border-white/10 rounded-2xl text-center text-[10px] text-slate-500">
-                All requests are configured to run with asynchronous loaders and error-boundary recovery wrappers.
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Terms & Conditions Modal */}
       <AnimatePresence>
