@@ -1414,48 +1414,85 @@ What specific aspect of **${detectedTopic}** would you like to design, write a c
 
         // Intercept explicit requests for a question to prevent them being treated as a technical topic definition
         const isRequestingQuestion = 
-          lowerAnswer.includes("give a question") ||
-          lowerAnswer.includes("give me a question") ||
-          lowerAnswer.includes("ask a question") ||
-          lowerAnswer.includes("ask me a question") ||
-          lowerAnswer.includes("ask question") ||
-          lowerAnswer.includes("give question") ||
-          lowerAnswer.includes("new question");
+          (lowerAnswer.includes("question") && (
+            lowerAnswer.includes("give") || 
+            lowerAnswer.includes("ask") || 
+            lowerAnswer.includes("show") || 
+            lowerAnswer.includes("get") || 
+            lowerAnswer.includes("new") || 
+            lowerAnswer.includes("basic") || 
+            lowerAnswer.includes("another") || 
+            lowerAnswer.includes("next") ||
+            lowerAnswer.includes("some")
+          )) ||
+          lowerAnswer.includes("ask me another") ||
+          lowerAnswer.includes("ask another") ||
+          lowerAnswer.includes("give another") ||
+          lowerAnswer.includes("give me another");
 
         if (isRequestingQuestion) {
-          if (isWaitingForTutorQuestion) {
+          let requestedQuestionsList = questionsList;
+          let categoryName = "";
+
+          if (lowerAnswer.includes("ml") || lowerAnswer.includes("ai") || lowerAnswer.includes("machine learning") || lowerAnswer.includes("data science") || lowerAnswer.includes("python") || lowerAnswer.includes("model")) {
+            requestedQuestionsList = getInterviewQuestions("Backend / ML Developer");
+            categoryName = "AI & Machine Learning";
+          } else if (lowerAnswer.includes("frontend") || lowerAnswer.includes("react") || lowerAnswer.includes("javascript") || lowerAnswer.includes("ui") || lowerAnswer.includes("css")) {
+            requestedQuestionsList = getInterviewQuestions("Frontend Developer");
+            categoryName = "Frontend Engineering";
+          } else if (lowerAnswer.includes("devops") || lowerAnswer.includes("cloud") || lowerAnswer.includes("kubernetes") || lowerAnswer.includes("terraform") || lowerAnswer.includes("gitops")) {
+            requestedQuestionsList = getInterviewQuestions("DevOps Architect");
+            categoryName = "DevOps & Platform Engineering";
+          }
+
+          if (categoryName) {
             setIsWaitingForTutorQuestion(false);
-            const activeQ = currentQ || questionsList[0];
+            const activeQ = requestedQuestionsList[0];
+            setMockQuestionIndex(0);
             setLastFeedback({
-              feedback: "Returned to the mock technical interview.",
+              feedback: `Switched focus to ${categoryName} questions.`,
               score: "MOCK",
               modelAnswer: activeQ.modelAnswer
             });
-            const nextQuestionText = `[AI Lead Interviewer]: Let's return to the active interview question. My question is: "${activeQ.question}"`;
+            const nextQuestionText = `[AI Lead Interviewer]: Understood! Let's focus on **${categoryName}**. Here is a basic question for you:
+            
+"${activeQ.question}"`;
             setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
           } else {
-            const nextIndex = mockQuestionIndex + 1;
-            setMockQuestionIndex(nextIndex);
-            if (nextIndex < questionsList.length) {
-              const nextQ = questionsList[nextIndex];
+            if (isWaitingForTutorQuestion) {
+              setIsWaitingForTutorQuestion(false);
+              const activeQ = currentQ || questionsList[0];
               setLastFeedback({
-                feedback: "Moved to the next interview round.",
+                feedback: "Returned to the mock technical interview.",
                 score: "MOCK",
-                modelAnswer: nextQ.question
+                modelAnswer: activeQ.modelAnswer
               });
-              const nextQuestionText = `[AI Lead Interviewer]: Understood! Here is the next question for you: "${nextQ.question}"`;
+              const nextQuestionText = `[AI Lead Interviewer]: Let's return to the active interview question. My question is: "${activeQ.question}"`;
               setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
             } else {
-              setLastFeedback({
-                feedback: "Successfully completed mock interview rounds!",
-                score: "COMPLETED",
-                modelAnswer: "You have unlocked the Infinite Career Tutor! Ask any software engineering or computer science questions."
-              });
-              const nextQuestionText = `Fantastic! You have successfully completed your Sandbox mock interview rounds.
-              
-🎓 [AI Career Tutor Activated]: I can now act as your infinite tutoring assistant!
-Just type whatever you want to learn next, or ask me: "ask me another question"!`;
-              setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+              const nextIndex = mockQuestionIndex + 1;
+              setMockQuestionIndex(nextIndex);
+              if (nextIndex < questionsList.length) {
+                const nextQ = questionsList[nextIndex];
+                setLastFeedback({
+                  feedback: "Moved to the next interview round.",
+                  score: "MOCK",
+                  modelAnswer: nextQ.question
+                });
+                const nextQuestionText = `[AI Lead Interviewer]: Understood! Here is the next question for you: "${nextQ.question}"`;
+                setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+              } else {
+                // Loop back to the first question
+                setMockQuestionIndex(0);
+                const firstQ = questionsList[0];
+                setLastFeedback({
+                  feedback: "Restarted interview deck questions.",
+                  score: "MOCK",
+                  modelAnswer: firstQ.modelAnswer
+                });
+                const nextQuestionText = `[AI Lead Interviewer]: You've reached the end of the question pool. Let's restart with this question: "${firstQ.question}"`;
+                setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+              }
             }
           }
           setIsSubmittingAnswer(false);
