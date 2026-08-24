@@ -19,6 +19,8 @@ export default function App() {
   const [showArchitectureModal, setShowArchitectureModal] = useState(false);
   const [showRecruiterModal, setShowRecruiterModal] = useState(false);
   const [showStatusModal, setShowStatusModal] = useState(false);
+  const [showSecurityModal, setShowSecurityModal] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
   const [toastMsg, setToastMsg] = useState(null);
   
   const showToast = (message) => {
@@ -2948,9 +2950,8 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
             <div className="w-full border-t border-white/5 py-8 mt-auto flex flex-col md:flex-row items-center justify-between gap-4 max-w-7xl px-4">
               <span className="text-xs text-slate-500">&copy; {new Date().getFullYear()} TalentForge Ecosystem. Inspired by visual excellence.</span>
               <div className="flex items-center gap-5 text-xs text-slate-400">
-                <span className="hover:text-white transition-colors cursor-pointer">Security Suite</span>
-                <span className="hover:text-white transition-colors cursor-pointer">API Integration</span>
-                <span className="hover:text-white transition-colors cursor-pointer">Terms & Conditions</span>
+                <span onClick={() => setShowSecurityModal(true)} className="hover:text-white transition-colors cursor-pointer">Security Suite</span>
+                <span onClick={() => setShowTermsModal(true)} className="hover:text-white transition-colors cursor-pointer">Terms & Conditions</span>
               </div>
             </div>
 
@@ -4950,6 +4951,161 @@ ${resumeData.education}
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Security Suite Modal */}
+      <AnimatePresence>
+        {showSecurityModal && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-[#02000c]/98 backdrop-blur-2xl overflow-y-auto flex flex-col p-6 sm:p-12 animate-fade-in"
+          >
+            <div className="absolute top-[-10%] left-[30%] w-[500px] h-[500px] bg-red-500/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-[-10%] right-[20%] w-[400px] h-[400px] bg-violet-600/10 rounded-full blur-[100px] pointer-events-none" />
+
+            <div className="w-full max-w-3xl mx-auto flex items-center justify-between border-b border-white/10 pb-6 mb-8 shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 border border-red-500/30 flex items-center justify-center shadow-lg">
+                  <Lock className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">TalentForge Security & Isolation Suite</h2>
+                  <p className="text-xs text-slate-400 font-medium">Verification of Sandbox Sandbox, Token Encryption, & Data Seeding Policies</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowSecurityModal(false)}
+                className="glass-button px-5 py-2.5 rounded-xl text-xs font-bold border border-red-500/40 text-red-400 hover:text-white shrink-0 shadow-lg cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="w-full max-w-3xl mx-auto flex-grow flex flex-col gap-6">
+              <div className="glass-panel rounded-3xl p-6 border border-white/5 flex flex-col gap-6">
+                <div className="flex gap-4 items-start border-b border-white/5 pb-4">
+                  <span className="text-2xl">🛡️</span>
+                  <div>
+                    <h3 className="text-sm font-bold text-white mb-1">Local Sandbox Execution</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      All uploaded candidate resume documents are parsed locally inside memory buffers. Our PDF text-extractor isolates runtime operations inside single-use subprocess contexts. No external servers cache your document text contents.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start border-b border-white/5 pb-4">
+                  <span className="text-2xl">🔑</span>
+                  <div>
+                    <h3 className="text-sm font-bold text-white mb-1">Environment Credential Isolation</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      API keys configured in the backend `.env` environment are kept entirely on the server side. Front-end requests are proxied securely, ensuring credentials are never exposed in browser builds or client inspection tools.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start border-b border-white/5 pb-4">
+                  <span className="text-2xl">💾</span>
+                  <div>
+                    <h3 className="text-sm font-bold text-white mb-1">Stateful Data Encryption & Storage</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Local SQLite database files utilize localized serialization schemas to prevent indexing leaks. If working under our database fail-safe model, simulated accounts (Sankalan, Urshita, Guest) compile within isolated state instances in local storage.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start">
+                  <span className="text-2xl">⚡</span>
+                  <div>
+                    <h3 className="text-sm font-bold text-white mb-1">Rate Limit Guarding</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Request throttling handles excessive chat generations or resume submissions to protect local APIs. This prevents service interruption and secures high-availability operations.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 bg-white/[0.01] border border-dashed border-white/10 rounded-2xl text-center text-[10px] text-slate-500">
+                TalentForge Security audited for standard local hosting environment. Zero external telemetry channels.
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Terms & Conditions Modal */}
+      <AnimatePresence>
+        {showTermsModal && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-[#02000c]/98 backdrop-blur-2xl overflow-y-auto flex flex-col p-6 sm:p-12 animate-fade-in"
+          >
+            <div className="absolute top-[-10%] left-[30%] w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-[-10%] right-[20%] w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
+
+            <div className="w-full max-w-3xl mx-auto flex items-center justify-between border-b border-white/10 pb-6 mb-8 shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-violet-600/10 text-violet-400 border border-violet-500/30 flex items-center justify-center shadow-lg">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">Terms & Conditions</h2>
+                  <p className="text-xs text-slate-400 font-medium">Bespoke TalentForge Platform Service Agreements</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowTermsModal(false)}
+                className="glass-button px-5 py-2.5 rounded-xl text-xs font-bold border border-violet-500/40 text-violet-400 hover:text-white shrink-0 shadow-lg cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="w-full max-w-3xl mx-auto flex-grow flex flex-col gap-6">
+              <div className="glass-panel rounded-3xl p-6 border border-white/5 flex flex-col gap-6">
+                <div className="flex gap-4 items-start border-b border-white/5 pb-4">
+                  <span className="text-2xl">📝</span>
+                  <div>
+                    <h3 className="text-sm font-bold text-white mb-1">Academic & Preparation Purpose</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      TalentForge is created for educational, developer mock-interview practice, and portfolio building purposes. Career roadmaps and suggested resume rewrites are intended as guidance; we do not guarantee specific scores or recruiter success.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start border-b border-white/5 pb-4">
+                  <span className="text-2xl">⚙️</span>
+                  <div>
+                    <h3 className="text-sm font-bold text-white mb-1">Local Sandbox Hosting Disclaimer</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      The service is deployed inside a localhost development instance. User agrees to provide correct configuration endpoints (CORS settings, python execution aliases, database streams) to allow local integrations to build successfully.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start">
+                  <span className="text-2xl">📊</span>
+                  <div>
+                    <h3 className="text-sm font-bold text-white mb-1">Mock Accounts Seeding</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Demo accounts (Sankalan, Urshita) are set up to demonstrate profile loading, scorecard generation, and resume templates. Users are free to modify, overwrite, or delete all seeded properties inside the local workspace databases.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 bg-white/[0.01] border border-dashed border-white/10 rounded-2xl text-center text-[10px] text-slate-500">
+                Latest Agreement Version: August 2026. Designed under visual excellence guidelines.
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
 
       {/* Dynamic Connection Status Toasts */}
       <AnimatePresence>
