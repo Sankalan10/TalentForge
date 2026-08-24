@@ -115,7 +115,7 @@ export default function App() {
     if (selectedAnalysis) {
       const applicantName = selectedAnalysis.analysis.applicant_name;
       const isUrshita = applicantName.toLowerCase() === "urshita";
-      const isAarav = applicantName.toLowerCase() === "aarav";
+      const isArnab = applicantName.toLowerCase() === "arnab";
       const isGuest = applicantName.toLowerCase() === "guest";
       
       if (isUrshita) {
@@ -149,15 +149,15 @@ export default function App() {
           skills: "Python, Flask, PyTorch, Scikit-Learn, Pandas, PostgreSQL, Redis, Docker, System Design, Git",
           education: "M.S. in Intelligent Systems - Global Tech Institute"
         });
-      } else if (isAarav) {
+      } else if (isArnab) {
         setResumeData({
-          name: "Aarav",
+          name: "Arnab",
           role: "DevOps & Infrastructure Architect",
-          email: "aarav@demo.com",
-          linkedin: "linkedin.com/in/aarav-cloud",
-          github: "github.com/aarav-ops",
-          website: "aarav.cloud",
-          summary: "Aarav is a highly skilled DevOps and Cloud Infrastructure Architect specializing in AWS, Kubernetes, Terraform, and resilient CI/CD pipelines.",
+          email: "arnab@demo.com",
+          linkedin: "linkedin.com/in/arnab-cloud",
+          github: "github.com/arnab-ops",
+          website: "arnab.cloud",
+          summary: "Arnab is a highly skilled DevOps and Cloud Infrastructure Architect specializing in AWS, Kubernetes, Terraform, and resilient CI/CD pipelines.",
           experience: [
             {
               company: "CloudScale Systems",
@@ -264,12 +264,12 @@ export default function App() {
           setTimeout(() => {
             // Determine active user details
             const isUrshitaActive = resumeData.name.toLowerCase() === "urshita" || userEmail.toLowerCase() === "urshita@demo.com";
-            const isAaravActive = resumeData.name.toLowerCase() === "aarav" || userEmail.toLowerCase() === "aarav@demo.com";
-            const defaultName = isUrshitaActive ? "Urshita" : (isAaravActive ? "Aarav" : "Sankalan");
-            const defaultEmail = isUrshitaActive ? "urshita@demo.com" : (isAaravActive ? "aarav@demo.com" : "sankalan@demo.com");
-            const defaultLinkedin = isUrshitaActive ? "linkedin.com/in/urshita" : (isAaravActive ? "linkedin.com/in/aarav-cloud" : "linkedin.com/in/sankalan");
-            const defaultGithub = isUrshitaActive ? "github.com/urshita-dev" : (isAaravActive ? "github.com/aarav-ops" : "github.com/sankalan");
-            const defaultWebsite = isUrshitaActive ? "urshita.ai" : (isAaravActive ? "aarav.cloud" : "sankalan.dev");
+            const isArnabActive = resumeData.name.toLowerCase() === "arnab" || userEmail.toLowerCase() === "arnab@demo.com";
+            const defaultName = isUrshitaActive ? "Urshita" : (isArnabActive ? "Arnab" : "Sankalan");
+            const defaultEmail = isUrshitaActive ? "urshita@demo.com" : (isArnabActive ? "arnab@demo.com" : "sankalan@demo.com");
+            const defaultLinkedin = isUrshitaActive ? "linkedin.com/in/urshita" : (isArnabActive ? "linkedin.com/in/arnab-cloud" : "linkedin.com/in/sankalan");
+            const defaultGithub = isUrshitaActive ? "github.com/urshita-dev" : (isArnabActive ? "github.com/arnab-ops" : "github.com/sankalan");
+            const defaultWebsite = isUrshitaActive ? "urshita.ai" : (isArnabActive ? "arnab.cloud" : "sankalan.dev");
 
             // Parse target role from prompt
             const promptLower = promptText.toLowerCase();
@@ -519,8 +519,8 @@ export default function App() {
       let mockList = [];
       if (userEmail.toLowerCase() === "urshita@demo.com") {
         mockList = [getMockAnalysisRecordUrshita()];
-      } else if (userEmail.toLowerCase() === "aarav@demo.com") {
-        mockList = [getMockAnalysisRecordAarav()];
+      } else if (userEmail.toLowerCase() === "arnab@demo.com") {
+        mockList = [getMockAnalysisRecordArnab()];
       } else if (authMethod === "guest" || userEmail.toLowerCase() === "guest@demo.com") {
         mockList = [getMockAnalysisRecordGuest()];
       } else {
@@ -1062,8 +1062,8 @@ You present a world-class backend and machine learning profile! Your experience 
 3. **Enterprise Storage**: Discuss query optimization profiling, partition limits, and asynchronous task execution (using Celery/RabbitMQ).
 
 Would you like me to draft a high-impact NLP project bullet point, or start an AI/ML systems engineering mock interview?`;
-      } else if (activeName.toLowerCase() === "aarav") {
-        return `📋 **Aarav's Personal Profile Optimization Strategy**:
+      } else if (activeName.toLowerCase() === "arnab") {
+        return `📋 **Arnab's Personal Profile Optimization Strategy**:
 
 You possess an outstanding infrastructure and DevOps toolkit! Your experience building multi-region AWS/EKS Kubernetes clusters, implementing IaC with Terraform, and configuring automated ArgoCD GitOps pipelines shows immense platform engineering maturity.
 
@@ -1701,7 +1701,7 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
     e.preventDefault();
     if (!userEmail.trim()) return;
 
-    if (userEmail.toLowerCase() === "sankalan@demo.com" || userEmail.toLowerCase() === "urshita@demo.com" || userEmail.toLowerCase() === "aarav@demo.com") {
+    if (userEmail.toLowerCase() === "sankalan@demo.com" || userEmail.toLowerCase() === "urshita@demo.com" || userEmail.toLowerCase() === "arnab@demo.com") {
       if (userPassword !== "123") {
         alert("Incorrect password for demo account! Use '123' to login.");
         return;
@@ -1907,16 +1907,16 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
     };
   };
 
-  const getMockAnalysisRecordAarav = () => {
+  const getMockAnalysisRecordArnab = () => {
     return {
-      id: "mock-aarav-9012",
+      id: "mock-arnab-9012",
       created_at: new Date().toISOString(),
-      github_username: "aarav-ops",
+      github_username: "arnab-ops",
       linkedin_text: "DevOps Architect & Infrastructure Engineer",
       analysis: {
-        applicant_name: "Aarav",
+        applicant_name: "Arnab",
         ats_score: 91,
-        summary: "Aarav has an exceptional infrastructure and platform engineering background focusing on AWS cloud architecture, containerized clusters (Kubernetes), and IaC (Terraform). The profile shows highly mature system administration and automation practices.",
+        summary: "Arnab has an exceptional infrastructure and platform engineering background focusing on AWS cloud architecture, containerized clusters (Kubernetes), and IaC (Terraform). The profile shows highly mature system administration and automation practices.",
         sub_scores: {
           formatting: 94,
           impact: 88,
@@ -1975,7 +1975,7 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
 
   const getMockPortfolioMeta = () => {
     const isUrshitaActive = resumeData.name.toLowerCase() === "urshita" || userEmail.toLowerCase() === "urshita@demo.com";
-    const isAaravActive = resumeData.name.toLowerCase() === "aarav" || userEmail.toLowerCase() === "aarav@demo.com";
+    const isArnabActive = resumeData.name.toLowerCase() === "arnab" || userEmail.toLowerCase() === "arnab@demo.com";
 
     if (isUrshitaActive) {
       return {
@@ -2021,11 +2021,11 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
           }
         ]
       };
-    } else if (isAaravActive) {
+    } else if (isArnabActive) {
       return {
         tagline: "Engineering Automated GitOps & High-Availability Cloud Platforms",
         bio: "I am a DevOps Architect who specializes in building multi-region Kubernetes clusters, automating Infrastructure as Code (Terraform), and establishing GitOps release pipelines. I write clean Bash/Python automations and focus on reliability metrics.",
-        terminal_welcome: "Welcome to TalentForge Aarav-Shell v1.0.0\nType 'help' to see a list of commands, or explore my resume dashboard.",
+        terminal_welcome: "Welcome to TalentForge Arnab-Shell v1.0.0\nType 'help' to see a list of commands, or explore my resume dashboard.",
         terminal_commands: [
           {
             command: "skills",
@@ -2783,13 +2783,13 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
                             <span className="text-[9px] text-slate-400 mt-0.5">urshita@demo.com</span>
                           </button>
 
-                          {/* Option 3: Aarav */}
+                          {/* Option 3: Arnab */}
                           <button
-                            onClick={() => handleGoogleLoginAs("aarav@demo.com")}
+                            onClick={() => handleGoogleLoginAs("arnab@demo.com")}
                             className="w-full py-3 px-4 rounded-xl border border-emerald-500/25 hover:border-emerald-500/50 bg-emerald-600/10 hover:bg-emerald-600/20 text-xs font-bold text-white transition-all flex flex-col items-center justify-center cursor-pointer shadow-md group"
                           >
-                            <span className="text-[11px] text-emerald-400 group-hover:text-emerald-300 font-extrabold uppercase tracking-wider">Continue as Aarav</span>
-                            <span className="text-[9px] text-slate-400 mt-0.5">aarav@demo.com</span>
+                            <span className="text-[11px] text-emerald-400 group-hover:text-emerald-300 font-extrabold uppercase tracking-wider">Continue as Arnab</span>
+                            <span className="text-[9px] text-slate-400 mt-0.5">arnab@demo.com</span>
                           </button>
                         </div>
 
@@ -2922,14 +2922,14 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
 
                       <button 
                         onClick={() => {
-                          setUserEmail("aarav@demo.com");
+                          setUserEmail("arnab@demo.com");
                           setUserPassword("123");
                           setShowEmailInput(true);
                         }}
                         className="glass-panel hover:border-emerald-500/30 px-3 py-1.5 rounded-xl text-[10px] text-slate-300 flex flex-col items-center bg-white/[0.01] hover:bg-white/[0.03] transition-all cursor-pointer"
                       >
-                        <span className="font-bold text-emerald-400 text-[11px] leading-none">Aarav</span>
-                        <span className="text-[9px] text-slate-500 mt-1">aarav@demo.com • pass: 123</span>
+                        <span className="font-bold text-emerald-400 text-[11px] leading-none">Arnab</span>
+                        <span className="text-[9px] text-slate-500 mt-1">arnab@demo.com • pass: 123</span>
                       </button>
                     </div>
                   </div>
@@ -5104,8 +5104,8 @@ ${resumeData.education}
                         let mockList = [];
                         if (userEmail.toLowerCase() === "urshita@demo.com") {
                           mockList = [getMockAnalysisRecordUrshita()];
-                        } else if (userEmail.toLowerCase() === "aarav@demo.com") {
-                          mockList = [getMockAnalysisRecordAarav()];
+                        } else if (userEmail.toLowerCase() === "arnab@demo.com") {
+                          mockList = [getMockAnalysisRecordArnab()];
                         } else {
                           mockList = [getMockAnalysisRecord()];
                         }
