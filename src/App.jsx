@@ -115,6 +115,7 @@ export default function App() {
     if (selectedAnalysis) {
       const applicantName = selectedAnalysis.analysis.applicant_name;
       const isUrshita = applicantName.toLowerCase() === "urshita";
+      const isAarav = applicantName.toLowerCase() === "aarav";
       const isGuest = applicantName.toLowerCase() === "guest";
       
       if (isUrshita) {
@@ -147,6 +148,37 @@ export default function App() {
           ],
           skills: "Python, Flask, PyTorch, Scikit-Learn, Pandas, PostgreSQL, Redis, Docker, System Design, Git",
           education: "M.S. in Intelligent Systems - Global Tech Institute"
+        });
+      } else if (isAarav) {
+        setResumeData({
+          name: "Aarav",
+          role: "DevOps & Infrastructure Architect",
+          email: "aarav@demo.com",
+          linkedin: "linkedin.com/in/aarav-cloud",
+          github: "github.com/aarav-ops",
+          website: "aarav.cloud",
+          summary: "Aarav is a highly skilled DevOps and Cloud Infrastructure Architect specializing in AWS, Kubernetes, Terraform, and resilient CI/CD pipelines.",
+          experience: [
+            {
+              company: "CloudScale Systems",
+              role: "Lead DevOps Engineer",
+              date: "2024 - Present",
+              bullets: [
+                "Architected multi-region Kubernetes clusters on AWS (EKS) using Terraform, improving platform reliability to 99.99% and reducing hosting costs by 28%.",
+                "Automated end-to-end containerized deployments with GitHub Actions and ArgoCD, slashing release cycle times from 2 days to under 15 minutes."
+              ]
+            }
+          ],
+          projects: [
+            {
+              title: "Self-Healing Infrastructure GitOps",
+              bullets: [
+                "Built an automated infrastructure monitoring and self-healing system using Prometheus, Grafana, and Kubernetes operators to auto-restart degraded pods."
+              ]
+            }
+          ],
+          skills: "AWS, Kubernetes, Terraform, Docker, CI/CD, GitHub Actions, Prometheus, Grafana, Linux, Bash, Python",
+          education: "B.Tech in Information Technology - Indian Institute of Technology"
         });
       } else if (isGuest) {
         setResumeData({
@@ -232,11 +264,12 @@ export default function App() {
           setTimeout(() => {
             // Determine active user details
             const isUrshitaActive = resumeData.name.toLowerCase() === "urshita" || userEmail.toLowerCase() === "urshita@demo.com";
-            const defaultName = isUrshitaActive ? "Urshita" : "Sankalan";
-            const defaultEmail = isUrshitaActive ? "urshita@demo.com" : "sankalan@demo.com";
-            const defaultLinkedin = isUrshitaActive ? "linkedin.com/in/urshita" : "linkedin.com/in/sankalan";
-            const defaultGithub = isUrshitaActive ? "github.com/urshita-dev" : "github.com/sankalan";
-            const defaultWebsite = isUrshitaActive ? "urshita.ai" : "sankalan.dev";
+            const isAaravActive = resumeData.name.toLowerCase() === "aarav" || userEmail.toLowerCase() === "aarav@demo.com";
+            const defaultName = isUrshitaActive ? "Urshita" : (isAaravActive ? "Aarav" : "Sankalan");
+            const defaultEmail = isUrshitaActive ? "urshita@demo.com" : (isAaravActive ? "aarav@demo.com" : "sankalan@demo.com");
+            const defaultLinkedin = isUrshitaActive ? "linkedin.com/in/urshita" : (isAaravActive ? "linkedin.com/in/aarav-cloud" : "linkedin.com/in/sankalan");
+            const defaultGithub = isUrshitaActive ? "github.com/urshita-dev" : (isAaravActive ? "github.com/aarav-ops" : "github.com/sankalan");
+            const defaultWebsite = isUrshitaActive ? "urshita.ai" : (isAaravActive ? "aarav.cloud" : "sankalan.dev");
 
             // Parse target role from prompt
             const promptLower = promptText.toLowerCase();
@@ -486,6 +519,8 @@ export default function App() {
       let mockList = [];
       if (userEmail.toLowerCase() === "urshita@demo.com") {
         mockList = [getMockAnalysisRecordUrshita()];
+      } else if (userEmail.toLowerCase() === "aarav@demo.com") {
+        mockList = [getMockAnalysisRecordAarav()];
       } else if (authMethod === "guest" || userEmail.toLowerCase() === "guest@demo.com") {
         mockList = [getMockAnalysisRecordGuest()];
       } else {
@@ -1027,6 +1062,17 @@ You present a world-class backend and machine learning profile! Your experience 
 3. **Enterprise Storage**: Discuss query optimization profiling, partition limits, and asynchronous task execution (using Celery/RabbitMQ).
 
 Would you like me to draft a high-impact NLP project bullet point, or start an AI/ML systems engineering mock interview?`;
+      } else if (activeName.toLowerCase() === "aarav") {
+        return `📋 **Aarav's Personal Profile Optimization Strategy**:
+
+You possess an outstanding infrastructure and DevOps toolkit! Your experience building multi-region AWS/EKS Kubernetes clusters, implementing IaC with Terraform, and configuring automated ArgoCD GitOps pipelines shows immense platform engineering maturity.
+
+**🎯 Key Recommendations to sound like a Principal SRE:**
+1. **Frontend Visibility**: While specializing in infra, understanding frontend deployment optimizations (CDN edge routing, caching headers, client bundler sizes) will expand your utility in team-wide architectures.
+2. **Application Observability**: Highlight custom metrics generation, APM tracing, and log aggregation practices (ELK stack/Loki) in addition to infrastructure-level metrics.
+3. **Database Scalability**: Highlight database sharding, replication setups, and scaling read/write database workloads under high load.
+
+Would you like me to draft a self-healing Kubernetes GitOps bullet point, or start a DevOps infrastructure system design mock interview?`;
       } else {
         return `📋 **Guest Profile Exploration & Career Guidance**:
 
@@ -1655,7 +1701,7 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
     e.preventDefault();
     if (!userEmail.trim()) return;
 
-    if (userEmail.toLowerCase() === "sankalan@demo.com" || userEmail.toLowerCase() === "urshita@demo.com") {
+    if (userEmail.toLowerCase() === "sankalan@demo.com" || userEmail.toLowerCase() === "urshita@demo.com" || userEmail.toLowerCase() === "aarav@demo.com") {
       if (userPassword !== "123") {
         alert("Incorrect password for demo account! Use '123' to login.");
         return;
@@ -1861,50 +1907,209 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
     };
   };
 
-  const getMockPortfolioMeta = () => {
+  const getMockAnalysisRecordAarav = () => {
     return {
-      tagline: "Crafting Scalable Full-Stack Solutions & AI Intelligence Platforms",
-      bio: "I am a passionate Full-Stack Engineer who specializes in building highly performant React interfaces, robust Flask backends, and integrating cutting-edge AI services. I write clean, modular code and focus deeply on visual micro-interactions and resilient system designs.",
-      terminal_welcome: "Welcome to TalentForge Shell v1.0.0\nType 'help' to see a list of commands, or explore my resume dashboard.",
-      terminal_commands: [
-        {
-          command: "skills",
-          output: "Core Languages: JavaScript, Python, HTML/CSS\nFrameworks: React, Flask, Express, Tailwind CSS\nDatabases: MongoDB, PostgreSQL"
+      id: "mock-aarav-9012",
+      created_at: new Date().toISOString(),
+      github_username: "aarav-ops",
+      linkedin_text: "DevOps Architect & Infrastructure Engineer",
+      analysis: {
+        applicant_name: "Aarav",
+        ats_score: 91,
+        summary: "Aarav has an exceptional infrastructure and platform engineering background focusing on AWS cloud architecture, containerized clusters (Kubernetes), and IaC (Terraform). The profile shows highly mature system administration and automation practices.",
+        sub_scores: {
+          formatting: 94,
+          impact: 88,
+          skills: 95,
+          achievements: 86
         },
-        {
-          command: "projects",
-          output: "1. TalentForge: AI Resume & Portfolio Builder (React, Flask, MongoDB, Gemini API)\n2. Aurora: Glassmorphic E-Commerce Hub (Vite, Tailwind, Firebase)"
+        strengths: [
+          "Superb expertise in Kubernetes orchestration, GitOps (ArgoCD), and continuous integration pipelines.",
+          "Solid infrastructure-as-code (Terraform) execution with modular structures.",
+          "Clear understanding of system monitoring, observability, and self-healing practices."
+        ],
+        weaknesses: [
+          "Limited experience with high-fidelity frontend UI rendering (React/Next.js).",
+          "Needs to highlight application-level optimization alongside network and cloud setup.",
+          "Could benefit from demonstrating backend database design/refactoring knowledge."
+        ],
+        suggestions: [
+          {
+            area: "Work Experience - Lead DevOps Engineer",
+            before: "Managed AWS servers and setup Kubernetes configurations.",
+            after: "Architected multi-region Kubernetes clusters on AWS (EKS) using Terraform, improving platform reliability to 99.99% and reducing hosting costs by 28%.",
+            why: "Establishes huge quantitative reliability metrics (99.99% uptime, 28% savings) and names exact production-grade technologies."
+          },
+          {
+            area: "Projects - GitOps CI/CD",
+            before: "Created scripts to deploy docker containers automatically.",
+            after: "Automated end-to-end containerized deployments with GitHub Actions and ArgoCD, slashing release cycle times from 2 days to under 15 minutes.",
+            why: "Replacing vague descriptions with specific GitOps tools and clear time-reduction metrics validates technical depth."
+          }
+        ],
+        missing_skills: {
+          critical: ["React / Frontend Frameworks", "Database Refactoring", "Application Performance Monitoring"],
+          recommended: ["Next.js", "Redis Caching", "Node.js"],
+          optional: ["GraphQL", "Tailwind CSS v4 CSS-Variables", "Vitest Unit Testing"]
         },
-        {
-          command: "about",
-          output: "Full Stack Engineer dedicated to bridging beautiful user interfaces with high-performance, fault-tolerant backend microservices."
-        }
-      ],
-      highlighted_projects: [
-        {
-          title: "TalentForge AI Platform",
-          description: "Designed and deployed an end-to-end intelligence workspace that parses PDFs, performs Gemini prompt evaluations, and crafts dynamic web assets.",
-          tech_stack: ["React", "TailwindCSS", "Flask", "Gemini API", "MongoDB"],
-          impact_metric: "Automated asset creation in under 4 seconds"
-        },
-        {
-          title: "Aurora Design System",
-          description: "Authored an HSL-tailored dark-mode glassmorphic component framework, offering reusable modular components.",
-          tech_stack: ["React", "Vite", "Tailwind CSS"],
-          impact_metric: "100% responsive, sub-100ms load times"
-        }
-      ],
-      custom_skills_group: [
-        {
-          category: "Frontend Craft",
-          skills: ["React", "Tailwind CSS v4", "Framer Motion", "Recharts"]
-        },
-        {
-          category: "Backend & Cloud",
-          skills: ["Flask (Python)", "RESTful APIs", "MongoDB", "Node.js", "Docker"]
-        }
-      ]
+        company_matching: [
+          {
+            type: "FAANG / Tier-1 Tech",
+            match_percentage: 88,
+            reasons: ["Excellent understanding of high availability, scale, and multi-region deployment strategies.", "Great fit for SRE or Platform Engineering roles."]
+          },
+          {
+            type: "High-Growth Startups",
+            match_percentage: 90,
+            reasons: ["Extremely agile automation setups. Able to build CI/CD pipelines from scratch to enable fast iterations.", "Helps startup squads deploy frequently with high safety."]
+          },
+          {
+            type: "Enterprise/Corporates",
+            match_percentage: 95,
+            reasons: ["Exceptional compliance, security isolation, and enterprise-grade Kubernetes control structures.", "Perfect fit for scale infrastructure roles."]
+          }
+        ]
+      }
     };
+  };
+
+  const getMockPortfolioMeta = () => {
+    const isUrshitaActive = resumeData.name.toLowerCase() === "urshita" || userEmail.toLowerCase() === "urshita@demo.com";
+    const isAaravActive = resumeData.name.toLowerCase() === "aarav" || userEmail.toLowerCase() === "aarav@demo.com";
+
+    if (isUrshitaActive) {
+      return {
+        tagline: "Crafting High-Performance Backend Architectures & Machine Learning Models",
+        bio: "I am a dedicated Backend and AI Specialist who focuses on building scalable Flask APIs, ML modeling with PyTorch/Scikit-Learn, and optimizing PostgreSQL database queries. I prioritize system logic, modular APIs, and efficient data parsing pipelines.",
+        terminal_welcome: "Welcome to TalentForge Urshita-Shell v1.0.0\nType 'help' to see a list of commands, or explore my resume dashboard.",
+        terminal_commands: [
+          {
+            command: "skills",
+            output: "Core Languages: Python, SQL, C++, R\nFrameworks: Flask, PyTorch, Pandas, Scikit-Learn\nDatabases: PostgreSQL, Redis, MongoDB"
+          },
+          {
+            command: "projects",
+            output: "1. NLP Text Classifier: Machine Learning API (Python, PyTorch, Flask)\n2. ETL Scaler: High-velocity records pipeline (Python, Redis, PostgreSQL)"
+          },
+          {
+            command: "about",
+            output: "Backend Engineer dedicated to building robust server logic, high-concurrency database queries, and intelligent data predictions."
+          }
+        ],
+        highlighted_projects: [
+          {
+            title: "NLP Model Hub API",
+            description: "Engineered and deployed a text classification microservice using PyTorch and Flask, achieving a 94.2% F1-accuracy score.",
+            tech_stack: ["Python", "Flask", "PyTorch", "Scikit-Learn"],
+            impact_metric: "Achieved 94.2% model classification accuracy"
+          },
+          {
+            title: "ETL Scaling Engine",
+            description: "Designed robust Flask ETL pipelines to process 5M+ daily records, optimizing query indexing to reduce read latency by 45%.",
+            tech_stack: ["Python", "Flask", "PostgreSQL", "Redis"],
+            impact_metric: "Slashed read query latency by 45%"
+          }
+        ],
+        custom_skills_group: [
+          {
+            category: "Core Backend & Data",
+            skills: ["Python", "Flask", "PostgreSQL", "Redis", "ETL Pipelines"]
+          },
+          {
+            category: "Machine Learning / AI",
+            skills: ["PyTorch", "Scikit-Learn", "Pandas", "System Design"]
+          }
+        ]
+      };
+    } else if (isAaravActive) {
+      return {
+        tagline: "Engineering Automated GitOps & High-Availability Cloud Platforms",
+        bio: "I am a DevOps Architect who specializes in building multi-region Kubernetes clusters, automating Infrastructure as Code (Terraform), and establishing GitOps release pipelines. I write clean Bash/Python automations and focus on reliability metrics.",
+        terminal_welcome: "Welcome to TalentForge Aarav-Shell v1.0.0\nType 'help' to see a list of commands, or explore my resume dashboard.",
+        terminal_commands: [
+          {
+            command: "skills",
+            output: "Cloud/Orchestration: AWS, Kubernetes, Docker, Terraform\nCI/CD & GitOps: GitHub Actions, ArgoCD\nMonitoring: Prometheus, Grafana, ELK Stack"
+          },
+          {
+            command: "projects",
+            output: "1. Multi-Region Kubernetes: IaC Cloud Setup (Terraform, AWS, ArgoCD)\n2. Self-Healing GitOps: Automatic recovery monitoring (Prometheus, Kubernetes)"
+          },
+          {
+            command: "about",
+            output: "Infrastructure Engineer dedicated to automating deployment pipelines, securing platform uptime, and writing scalable IaC modules."
+          }
+        ],
+        highlighted_projects: [
+          {
+            title: "Multi-Region Kubernetes EKS",
+            description: "Architected multi-region Kubernetes clusters on AWS (EKS) using Terraform, improving platform reliability to 99.99% and reducing hosting costs by 28%.",
+            tech_stack: ["AWS", "Kubernetes", "Terraform", "Docker"],
+            impact_metric: "Secured 99.99% high-availability uptime"
+          },
+          {
+            title: "ArgoCD GitOps Automation",
+            description: "Automated end-to-end containerized deployments with GitHub Actions and ArgoCD, slashing release cycle times from 2 days to under 15 minutes.",
+            tech_stack: ["ArgoCD", "GitHub Actions", "Kubernetes", "Helm"],
+            impact_metric: "Slashed release cycle from 2 days to 15 mins"
+          }
+        ],
+        custom_skills_group: [
+          {
+            category: "Cloud & IaC",
+            skills: ["AWS", "Kubernetes", "Terraform", "Docker", "Linux/Bash"]
+          },
+          {
+            category: "GitOps & Monitoring",
+            skills: ["GitHub Actions", "ArgoCD", "Prometheus", "Grafana", "ELK Stack"]
+          }
+        ]
+      };
+    } else {
+      return {
+        tagline: "Crafting Scalable Full-Stack Solutions & AI Intelligence Platforms",
+        bio: "I am a passionate Full-Stack Engineer who specializes in building highly performant React interfaces, robust Flask backends, and integrating cutting-edge AI services. I write clean, modular code and focus deeply on visual micro-interactions and resilient system designs.",
+        terminal_welcome: "Welcome to TalentForge Shell v1.0.0\nType 'help' to see a list of commands, or explore my resume dashboard.",
+        terminal_commands: [
+          {
+            command: "skills",
+            output: "Core Languages: JavaScript, Python, HTML/CSS\nFrameworks: React, Flask, Express, Tailwind CSS\nDatabases: MongoDB, PostgreSQL"
+          },
+          {
+            command: "projects",
+            output: "1. TalentForge: AI Resume & Portfolio Builder (React, Flask, MongoDB, Gemini API)\n2. Aurora: Glassmorphic E-Commerce Hub (Vite, Tailwind, Firebase)"
+          },
+          {
+            command: "about",
+            output: "Full Stack Engineer dedicated to bridging beautiful user interfaces with high-performance, fault-tolerant backend microservices."
+          }
+        ],
+        highlighted_projects: [
+          {
+            title: "TalentForge AI Platform",
+            description: "Designed and deployed an end-to-end intelligence workspace that parses PDFs, performs Gemini prompt evaluations, and crafts dynamic web assets.",
+            tech_stack: ["React", "TailwindCSS", "Flask", "Gemini API", "MongoDB"],
+            impact_metric: "Automated asset creation in under 4 seconds"
+          },
+          {
+            title: "Aurora Design System",
+            description: "Authored an HSL-tailored dark-mode glassmorphic component framework, offering reusable modular components.",
+            tech_stack: ["React", "Vite", "Tailwind CSS"],
+            impact_metric: "100% responsive, sub-100ms load times"
+          }
+        ],
+        custom_skills_group: [
+          {
+            category: "Frontend Craft",
+            skills: ["React", "Tailwind CSS v4", "Framer Motion", "Recharts"]
+          },
+          {
+            category: "Backend & Cloud",
+            skills: ["Flask (Python)", "RESTful APIs", "MongoDB", "Node.js", "Docker"]
+          }
+        ]
+      };
+    }
   };
 
   const getMockRoadmapData = (role) => {
@@ -2577,6 +2782,15 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
                             <span className="text-[11px] text-cyan-400 group-hover:text-cyan-300 font-extrabold uppercase tracking-wider">Continue as Urshita</span>
                             <span className="text-[9px] text-slate-400 mt-0.5">urshita@demo.com</span>
                           </button>
+
+                          {/* Option 3: Aarav */}
+                          <button
+                            onClick={() => handleGoogleLoginAs("aarav@demo.com")}
+                            className="w-full py-3 px-4 rounded-xl border border-emerald-500/25 hover:border-emerald-500/50 bg-emerald-600/10 hover:bg-emerald-600/20 text-xs font-bold text-white transition-all flex flex-col items-center justify-center cursor-pointer shadow-md group"
+                          >
+                            <span className="text-[11px] text-emerald-400 group-hover:text-emerald-300 font-extrabold uppercase tracking-wider">Continue as Aarav</span>
+                            <span className="text-[9px] text-slate-400 mt-0.5">aarav@demo.com</span>
+                          </button>
                         </div>
 
                         <button
@@ -2704,6 +2918,18 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
                       >
                         <span className="font-bold text-cyan-400 text-[11px] leading-none">Urshita</span>
                         <span className="text-[9px] text-slate-500 mt-1">urshita@demo.com • pass: 123</span>
+                      </button>
+
+                      <button 
+                        onClick={() => {
+                          setUserEmail("aarav@demo.com");
+                          setUserPassword("123");
+                          setShowEmailInput(true);
+                        }}
+                        className="glass-panel hover:border-emerald-500/30 px-3 py-1.5 rounded-xl text-[10px] text-slate-300 flex flex-col items-center bg-white/[0.01] hover:bg-white/[0.03] transition-all cursor-pointer"
+                      >
+                        <span className="font-bold text-emerald-400 text-[11px] leading-none">Aarav</span>
+                        <span className="text-[9px] text-slate-500 mt-1">aarav@demo.com • pass: 123</span>
                       </button>
                     </div>
                   </div>
@@ -4878,6 +5104,8 @@ ${resumeData.education}
                         let mockList = [];
                         if (userEmail.toLowerCase() === "urshita@demo.com") {
                           mockList = [getMockAnalysisRecordUrshita()];
+                        } else if (userEmail.toLowerCase() === "aarav@demo.com") {
+                          mockList = [getMockAnalysisRecordAarav()];
                         } else {
                           mockList = [getMockAnalysisRecord()];
                         }
