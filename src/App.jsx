@@ -675,6 +675,13 @@ export default function App() {
     if (roleLower.includes("data") || roleLower.includes("ml") || roleLower.includes("machine") || roleLower.includes("intelligence") || roleLower.includes("backend")) {
       return [
         {
+          question: "What is the difference between supervised and unsupervised learning, and can you provide a real-world example of each?",
+          keywords: ["supervised", "unsupervised", "label", "labeled", "unlabeled", "clustering", "regression", "classification", "example", "predict"],
+          modelAnswer: "Supervised learning uses labeled training data to predict outputs (e.g., house price forecasting or email spam classification). Unsupervised learning works on unlabeled data to discover hidden patterns or groupings (e.g., customer segmentation clustering or anomaly detection).",
+          nextQuestion: "Can you explain the difference between L1 and L2 regularization, and when you would use one over the other?",
+          topic: "Supervised vs Unsupervised Learning"
+        },
+        {
           question: "Can you explain the difference between L1 and L2 regularization, and when you would use one over the other?",
           keywords: ["l1", "l2", "lasso", "ridge", "sparsity", "absolute", "squared", "penalty", "feature selection", "overfitting"],
           modelAnswer: "L1 regularization (Lasso) adds an absolute value penalty to the weights, forcing some coefficients to exactly zero, which acts as feature selection. L2 regularization (Ridge) adds a squared penalty, shrinking weights towards zero but not making them zero, which is ideal when you have many collinear features.",
