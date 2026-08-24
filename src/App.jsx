@@ -1412,6 +1412,56 @@ What specific aspect of **${detectedTopic}** would you like to design, write a c
         // Standard Active Question (if within bounds)
         const currentQ = mockQuestionIndex < questionsList.length ? questionsList[mockQuestionIndex] : null;
 
+        // Intercept explicit requests for a question to prevent them being treated as a technical topic definition
+        const isRequestingQuestion = 
+          lowerAnswer.includes("give a question") ||
+          lowerAnswer.includes("give me a question") ||
+          lowerAnswer.includes("ask a question") ||
+          lowerAnswer.includes("ask me a question") ||
+          lowerAnswer.includes("ask question") ||
+          lowerAnswer.includes("give question") ||
+          lowerAnswer.includes("new question");
+
+        if (isRequestingQuestion) {
+          if (isWaitingForTutorQuestion) {
+            setIsWaitingForTutorQuestion(false);
+            const activeQ = currentQ || questionsList[0];
+            setLastFeedback({
+              feedback: "Returned to the mock technical interview.",
+              score: "MOCK",
+              modelAnswer: activeQ.modelAnswer
+            });
+            const nextQuestionText = `[AI Lead Interviewer]: Let's return to the active interview question. My question is: "${activeQ.question}"`;
+            setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+          } else {
+            const nextIndex = mockQuestionIndex + 1;
+            setMockQuestionIndex(nextIndex);
+            if (nextIndex < questionsList.length) {
+              const nextQ = questionsList[nextIndex];
+              setLastFeedback({
+                feedback: "Moved to the next interview round.",
+                score: "MOCK",
+                modelAnswer: nextQ.question
+              });
+              const nextQuestionText = `[AI Lead Interviewer]: Understood! Here is the next question for you: "${nextQ.question}"`;
+              setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+            } else {
+              setLastFeedback({
+                feedback: "Successfully completed mock interview rounds!",
+                score: "COMPLETED",
+                modelAnswer: "You have unlocked the Infinite Career Tutor! Ask any software engineering or computer science questions."
+              });
+              const nextQuestionText = `Fantastic! You have successfully completed your Sandbox mock interview rounds.
+              
+🎓 [AI Career Tutor Activated]: I can now act as your infinite tutoring assistant!
+Just type whatever you want to learn next, or ask me: "ask me another question"!`;
+              setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+            }
+          }
+          setIsSubmittingAnswer(false);
+          return;
+        }
+
         // 1. Navigation check while inside Tutor Lock state (MUST run first to intercept 'skip', 'next', 'continue', 'resume')
         if (isWaitingForTutorQuestion) {
           if (lowerAnswer.includes("continue") || lowerAnswer.includes("return") || lowerAnswer.includes("back") || lowerAnswer.includes("resume")) {
