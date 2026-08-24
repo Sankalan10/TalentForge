@@ -3093,85 +3093,7 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
               )}
             </AnimatePresence>
 
-            {/* Recruiter Panel Full-Screen Overlay */}
-            <AnimatePresence>
-              {showRecruiterModal && (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="fixed inset-0 z-50 bg-[#02000c]/98 backdrop-blur-2xl overflow-y-auto flex flex-col p-6 sm:p-12"
-                >
-                  {/* Radial Neon Highlights */}
-                  <div className="absolute top-[-10%] left-[30%] w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none" />
-                  <div className="absolute bottom-[-10%] right-[20%] w-[400px] h-[400px] bg-fuchsia-600/10 rounded-full blur-[100px] pointer-events-none" />
 
-                  {/* Header */}
-                  <div className="w-full max-w-7xl mx-auto flex items-center justify-between border-b border-white/10 pb-6 mb-8 shrink-0">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-cyan-600/10 text-cyan-400 border border-cyan-500/30 flex items-center justify-center shadow-lg">
-                        <Sparkles className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">Recruiter Audit & Hiring Suite</h2>
-                        <p className="text-xs text-slate-400 font-medium">Bespoke integrations built to capture hiring manager attention</p>
-                      </div>
-                    </div>
-                    <button 
-                      onClick={() => setShowRecruiterModal(false)}
-                      className="glass-button px-5 py-2.5 rounded-xl text-xs font-bold border border-cyan-500/40 text-cyan-400 hover:text-white shrink-0 shadow-lg"
-                    >
-                      Close
-                    </button>
-                  </div>
-
-                  {/* Recruiter Suite Grid */}
-                  <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 flex-grow">
-                    
-                    {/* Block 1 */}
-                    <div className="glass-panel rounded-3xl p-6 border border-white/5 flex flex-col gap-4 relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-violet-600/5 rounded-full blur-2xl" />
-                      <div className="text-[10px] font-bold text-violet-400 tracking-widest uppercase">Integration Module #1</div>
-                      <h3 className="text-base font-bold text-white">🔗 Shareable Candidate Talent Card</h3>
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                        Instead of sending heavy static documents, candidates can toggle their dashboards to "Public Recruiter View" and copy a single shareable link. 
-                      </p>
-                      <p className="text-[11px] text-slate-500 leading-relaxed border-t border-white/5 pt-4">
-                        Recruiters click the link and instantly load your calculated scores, strengths, comparative before/after suggestions, target roadmap, and customizable portfolio—making evaluation extremely fast and interactive.
-                      </p>
-                    </div>
-
-                    {/* Block 2 */}
-                    <div className="glass-panel rounded-3xl p-6 border border-white/5 flex flex-col gap-4 relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-600/5 rounded-full blur-2xl" />
-                      <div className="text-[10px] font-bold text-cyan-400 tracking-widest uppercase">Integration Module #2</div>
-                      <h3 className="text-base font-bold text-white">📊 Comparative ATS Scorecard</h3>
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                        To prove engineering maturity, we parsed exact power verbs, formatting layout rules, skill density, and accomplishments using custom scoring equations.
-                      </p>
-                      <p className="text-[11px] text-slate-500 leading-relaxed border-t border-white/5 pt-4">
-                        Hiring managers can see a direct comparison showing weak resume sentences vs their AI-refactored, metric-rich versions—highlighting exactly how a candidate impacts business products.
-                      </p>
-                    </div>
-
-                    {/* Block 3 */}
-                    <div className="glass-panel rounded-3xl p-6 border border-white/5 flex flex-col gap-4 relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-600/5 rounded-full blur-2xl" />
-                      <div className="text-[10px] font-bold text-emerald-400 tracking-widest uppercase">Integration Module #3</div>
-                      <h3 className="text-base font-bold text-white">🛠️ Robust Offline Testing Safeguards</h3>
-                      <p className="text-xs text-slate-400 leading-relaxed">
-                        Hiring teams often reject applications if local code builds fail or demand complex set-up configurations.
-                      </p>
-                      <p className="text-[11px] text-slate-500 leading-relaxed border-t border-white/5 pt-4">
-                        To ensure zero setup issues, we integrated automatic local mock file connectors. Anyone can run and test every tab, theme exporter, interview chat, and scorecard instantly with zero API dependencies, establishing massive reliability.
-                      </p>
-                    </div>
-
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
 
             {/* Footer badges */}
             <div className="w-full border-t border-white/5 py-8 mt-auto flex flex-col md:flex-row items-center justify-between gap-4 max-w-7xl px-4">
@@ -5412,6 +5334,86 @@ ${resumeData.education}
               <div className="p-4 bg-white/[0.01] border border-dashed border-white/10 rounded-2xl text-center text-[10px] text-slate-500">
                 Latest Agreement Version: August 2026. Designed under visual excellence guidelines.
               </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Recruiter Panel Full-Screen Overlay */}
+      <AnimatePresence>
+        {showRecruiterModal && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-[#02000c]/98 backdrop-blur-2xl overflow-y-auto flex flex-col p-6 sm:p-12 animate-fade-in"
+          >
+            {/* Radial Neon Highlights */}
+            <div className="absolute top-[-10%] left-[30%] w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-[-10%] right-[20%] w-[400px] h-[400px] bg-fuchsia-600/10 rounded-full blur-[100px] pointer-events-none" />
+
+            {/* Header */}
+            <div className="w-full max-w-7xl mx-auto flex items-center justify-between border-b border-white/10 pb-6 mb-8 shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-cyan-600/10 text-cyan-400 border border-cyan-500/30 flex items-center justify-center shadow-lg">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">Recruiter Audit & Hiring Suite</h2>
+                  <p className="text-xs text-slate-400 font-medium">Bespoke integrations built to capture hiring manager attention</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setShowRecruiterModal(false)}
+                className="glass-button px-5 py-2.5 rounded-xl text-xs font-bold border border-cyan-500/40 text-cyan-400 hover:text-white shrink-0 shadow-lg cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+
+            {/* Recruiter Suite Grid */}
+            <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 flex-grow">
+              
+              {/* Block 1 */}
+              <div className="glass-panel rounded-3xl p-6 border border-white/5 flex flex-col gap-4 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-violet-600/5 rounded-full blur-2xl" />
+                <div className="text-[10px] font-bold text-violet-400 tracking-widest uppercase">Integration Module #1</div>
+                <h3 className="text-base font-bold text-white">🔗 Shareable Candidate Talent Card</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Instead of sending heavy static documents, candidates can toggle their dashboards to "Public Recruiter View" and copy a single shareable link. 
+                </p>
+                <p className="text-[11px] text-slate-500 leading-relaxed border-t border-white/5 pt-4">
+                  Recruiters click the link and instantly load your calculated scores, strengths, comparative before/after suggestions, target roadmap, and customizable portfolio—making evaluation extremely fast and interactive.
+                </p>
+              </div>
+
+              {/* Block 2 */}
+              <div className="glass-panel rounded-3xl p-6 border border-white/5 flex flex-col gap-4 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-600/5 rounded-full blur-2xl" />
+                <div className="text-[10px] font-bold text-cyan-400 tracking-widest uppercase">Integration Module #2</div>
+                <h3 className="text-base font-bold text-white">📊 Comparative ATS Scorecard</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  To prove engineering maturity, we parsed exact power verbs, formatting layout rules, skill density, and accomplishments using custom scoring equations.
+                </p>
+                <p className="text-[11px] text-slate-500 leading-relaxed border-t border-white/5 pt-4">
+                  Hiring managers can see a direct comparison showing weak resume sentences vs their AI-refactored, metric-rich versions—highlighting exactly how a candidate impacts business products.
+                </p>
+              </div>
+
+              {/* Block 3 */}
+              <div className="glass-panel rounded-3xl p-6 border border-white/5 flex flex-col gap-4 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-600/5 rounded-full blur-2xl" />
+                <div className="text-[10px] font-bold text-emerald-400 tracking-widest uppercase">Integration Module #3</div>
+                <h3 className="text-base font-bold text-white">🛠️ Robust Offline Testing Safeguards</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Hiring teams often reject applications if local code builds fail or demand complex set-up configurations.
+                </p>
+                <p className="text-[11px] text-slate-500 leading-relaxed border-t border-white/5 pt-4">
+                  To ensure zero setup issues, we integrated automatic local mock file connectors. Anyone can run and test every tab, theme exporter, interview chat, and scorecard instantly with zero API dependencies, establishing massive reliability.
+                </p>
+              </div>
+
             </div>
           </motion.div>
         )}
