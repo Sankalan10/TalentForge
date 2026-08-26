@@ -74,7 +74,70 @@ class DBService:
         self._write_mock_db(db_data)
         return record
 
+    def _get_mock_analysis_by_id(self, analysis_id):
+        name = "Sankalan"
+        role = "Frontend Developer"
+        skills = "React, JavaScript, HTML, CSS, Tailwind CSS, REST APIs, Flask, MongoDB"
+        
+        if "urshita" in analysis_id:
+            name = "Urshita"
+            role = "Backend & Machine Learning Developer"
+            skills = "Python, Flask, PyTorch, Scikit-Learn, Pandas, PostgreSQL, Redis, Docker, System Design, Git"
+        elif "arnab" in analysis_id:
+            name = "Arnab"
+            role = "DevOps & Infrastructure Architect"
+            skills = "AWS, Kubernetes, Terraform, Docker, CI/CD, GitOps (ArgoCD), Prometheus, Grafana, ELK Stack"
+        elif "guest" in analysis_id:
+            name = "Guest"
+            role = "Software Developer"
+            skills = "General Software Engineering, Python, JavaScript, SQL"
+
+        return {
+            "id": analysis_id,
+            "created_at": datetime.utcnow().isoformat(),
+            "github_username": name.lower(),
+            "linkedin_text": f"{role} at Tech Corp",
+            "resume_text": f"Resume of {name}. Role: {role}. Skills: {skills}.",
+            "analysis": {
+                "applicant_name": name,
+                "ats_score": 85,
+                "summary": f"{name} is a high-caliber developer showing solid expertise in {role} and skills like {skills}.",
+                "sub_scores": {
+                    "formatting": 90,
+                    "impact": 80,
+                    "skills": 85,
+                    "achievements": 80
+                },
+                "strengths": [
+                    f"Superb integration of {skills.split(',')[0]} and related frameworks.",
+                    "Excellent architecture, properly handling production requirements.",
+                    "Clean visual layout and standard formatting."
+                ],
+                "weaknesses": [
+                    "Needs to highlight more high-availability database replication.",
+                    "Could demonstrate more automated deployment workflows.",
+                    "Should add additional quantifiable impact metrics."
+                ],
+                "suggestions": [
+                    {
+                        "area": "Work Experience",
+                        "before": "Worked on scripts to process data.",
+                        "after": f"Designed and deployed scalable {role} systems, optimizing performance by 35%.",
+                        "why": "Establishes a solid quantifiable metric."
+                    }
+                ],
+                "missing_skills": {
+                    "critical": ["Docker / Containerization", "AWS / Cloud Deployments"],
+                    "recommended": ["TypeScript", "Redis Caching"],
+                    "optional": ["GraphQL", "Tailwind CSS v4"]
+                }
+            }
+        }
+
     def get_analysis(self, analysis_id):
+        if analysis_id and analysis_id.startswith("mock-"):
+            return self._get_mock_analysis_by_id(analysis_id)
+
         if not self.use_fallback:
             try:
                 record = self.db.analyses.find_one({"id": analysis_id})

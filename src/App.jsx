@@ -501,9 +501,22 @@ export default function App() {
       const res = await fetch(`${API_BASE}/analyses`);
       if (res.ok) {
         const data = await res.json();
-        setAnalyses(data);
         if (data.length > 0) {
+          setAnalyses(data);
           setSelectedAnalysis(data[0]);
+        } else {
+          let mockList = [];
+          if (userEmail.toLowerCase() === "urshita@demo.com") {
+            mockList = [getMockAnalysisRecordUrshita()];
+          } else if (userEmail.toLowerCase() === "arnab@demo.com") {
+            mockList = [getMockAnalysisRecordArnab()];
+          } else if (authMethod === "guest" || userEmail.toLowerCase() === "guest@demo.com") {
+            mockList = [getMockAnalysisRecordGuest()];
+          } else {
+            mockList = [getMockAnalysisRecord()];
+          }
+          setAnalyses(mockList);
+          setSelectedAnalysis(mockList[0]);
         }
         setIsOffline(false);
         if (isManual) {
