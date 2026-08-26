@@ -1545,7 +1545,7 @@ What specific aspect of **${detectedTopic}** would you like to design, write a c
             
 [AI Career Tutor]: ${tutorExplanation}
 
-Should I start the interview preparation?`;
+Ok! Tell me what you want to ask then we should proceed.`;
             setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
           }
           setIsSubmittingAnswer(false);
