@@ -3067,57 +3067,9 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
                   </div>
 
                   {/* Dashboard Explorer Grid */}
-                  <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
-                    
-                    {/* Left: Interactive Directory Explorer Tree (4 Columns) */}
-                    <div className="lg:col-span-4 glass-panel rounded-3xl p-6 border border-white/5 flex flex-col gap-4">
-                      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/5 pb-2.5 flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-violet-400" />
-                        📁 Monorepo File Explorer
-                      </h3>
-
-                      <div className="flex flex-col gap-3 font-mono text-[11px] text-slate-400 leading-normal overflow-y-auto max-h-[440px] pr-1">
-                        
-                        {/* root */}
-                        <div className="flex items-center gap-1.5 font-bold text-white"><span className="text-violet-400">📂</span> TalentForge-Workspace/</div>
-                        
-                        {/* backend */}
-                        <div className="pl-4 flex flex-col gap-2 border-l border-white/5 ml-2.5">
-                          <div className="flex items-center gap-1.5 font-bold text-slate-300"><span>📂</span> backend/</div>
-                          <div className="pl-4 flex flex-col gap-2 border-l border-white/5 ml-2.5">
-                            <div className="flex items-center gap-1.5"><span>📂</span> routes/</div>
-                            <div className="pl-4 flex flex-col gap-1.5 border-l border-white/5 ml-2.5">
-                              <div className="flex items-center gap-1 text-[10px]"><span>📄</span> analyze.py <span className="text-violet-500">(Scorecard Route)</span></div>
-                              <div className="flex items-center gap-1 text-[10px]"><span>📄</span> portfolio.py <span className="text-cyan-500">(Theme Exports)</span></div>
-                              <div className="flex items-center gap-1 text-[10px]"><span>📄</span> interview.py <span className="text-emerald-500">(Mock Chat API)</span></div>
-                            </div>
-                            <div className="flex items-center gap-1.5"><span>📂</span> services/</div>
-                            <div className="pl-4 flex flex-col gap-1.5 border-l border-white/5 ml-2.5">
-                              <div className="flex items-center gap-1 text-[10px]"><span>📄</span> resume_parser.py <span className="text-slate-500">(pypdf Extractor)</span></div>
-                              <div className="flex items-center gap-1 text-[10px]"><span>📄</span> gemini_service.py <span className="text-violet-400">(AI Orchestration)</span></div>
-                              <div className="flex items-center gap-1 text-[10px]"><span>📄</span> db_service.py <span className="text-emerald-400">(Mongo & Fallback)</span></div>
-                            </div>
-                            <div className="flex items-center gap-1"><span>📄</span> app.py <span className="text-white/80">(Flask Entrypoint)</span></div>
-                            <div className="flex items-center gap-1 text-slate-500"><span>📄</span> requirements.txt</div>
-                          </div>
-                        </div>
-
-                        {/* frontend */}
-                        <div className="pl-4 flex flex-col gap-2 border-l border-white/5 ml-2.5 mt-1">
-                          <div className="flex items-center gap-1.5 font-bold text-slate-300"><span>📂</span> src/</div>
-                          <div className="pl-4 flex flex-col gap-1.5 border-l border-white/5 ml-2.5">
-                            <div className="flex items-center gap-1"><span>📄</span> App.jsx <span className="text-violet-400">(Landing & Dashboard SPA)</span></div>
-                            <div className="flex items-center gap-1"><span>📄</span> index.css <span className="text-cyan-400">(Tailwind v4 Styling)</span></div>
-                            <div className="flex items-center gap-1 text-slate-500"><span>📄</span> main.jsx</div>
-                          </div>
-                          <div className="flex items-center gap-1 text-slate-500"><span>📄</span> vite.config.js <span className="text-xs text-white/50">(Port 3000 config)</span></div>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    {/* Right: Immersive Architecture Detail Cards (8 Columns) */}
-                    <div className="lg:col-span-8 flex flex-col gap-6 overflow-y-auto pr-1 max-h-[500px]">
+                  <div className="w-full max-w-7xl mx-auto flex-grow">
+                    {/* Immersive Architecture Detail Cards (12 Columns) */}
+                    <div className="w-full flex flex-col gap-6 overflow-y-auto pr-1 max-h-[500px]">
                       
                       {/* Flow Step 1 */}
                       <div className="glass-panel rounded-2xl p-5 border border-white/5 hover:border-violet-500/20 transition-all flex items-start gap-4">
