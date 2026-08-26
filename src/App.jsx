@@ -1099,6 +1099,34 @@ What should we explore next?`;
 What other creative prompts or coding problems would you like me to tackle?`;
     }
 
+    // 7.5. General Interview Study / What to Learn Guidance
+    if (/\b(what to learn|what things|what should i study|how to pass|pass the interview|what to study|interview tips|prepare for interview|software engineer interview|study to pass)\b/i.test(lowerQuery)) {
+      return `📚 **Comprehensive Software Engineering Interview Prep Guide**
+      
+To successfully pass a technical software engineering interview, you should focus on mastering these four core dimensions:
+
+1. **Data Structures & Algorithms (DSA)**
+   • **Core Topics**: Arrays, Strings, Hash Maps, Linked Lists, Trees (Binary Trees, BSTs), Graphs, and Recursion.
+   • **Key Patterns**: Two Pointers, Sliding Window, BFS/DFS tree traversals, and Binary Search.
+   • **Evaluation**: Practice tracking runtime and memory usage using Big-O notation ($O(1)$, $O(\\log N)$, $O(N)$).
+
+2. **System Design & Architecture**
+   • **Scalability**: Understand Horizontal vs Vertical scaling and Load Balancers.
+   • **Caching & Databases**: Learn how to use Redis caching and understand SQL (indexing, joins) vs NoSQL (flexible schema, eventual consistency) trade-offs.
+   • **APIs**: Compare REST endpoints, GraphQL flexibility, and gRPC efficiency.
+
+3. **Domain-Specific Mastery (Frontend / Backend / DevOps)**
+   • **Frontend**: Deep dive into React's Virtual DOM, reconciliation, component lifecycles, and Tailwind styling.
+   • **Backend**: Master modular RESTful APIs (like Flask), database connection pools, and offline fallback strategies.
+   • **DevOps**: Understand Docker containerization benefits, Kubernetes orchestration, and declarative IaC with Terraform.
+
+4. **Behavioral Rounds & Portfolio Presentation**
+   • Use the **STAR method** (Situation, Task, Action, Result) to explain past projects.
+   • Be ready to talk about real-world engineering trade-offs (e.g., *"We chose Redis over local cache to prevent horizontal sync lag, even though it raised hosting costs"*).
+
+💡 **Pro Tip**: You can practice all of these interactive rounds right here in our **Interview Preparation** tab! Just select your target role (Frontend, DevOps, or Backend/ML) and type **\"yes\"** to start your mock technical interview!`;
+    }
+
     // 7. Profile Specific Guidance
     if (/\b(my resume|my profile|how is my resume|review my resume|give me advice|what should i study|what skills)\b/i.test(lowerQuery)) {
       const activeName = resumeData?.name || "Guest";
