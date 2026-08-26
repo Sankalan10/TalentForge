@@ -63,6 +63,8 @@ export default function App() {
   const [lastFeedback, setLastFeedback] = useState(null);
   const [mockQuestionIndex, setMockQuestionIndex] = useState(0);
   const [isWaitingForTutorQuestion, setIsWaitingForTutorQuestion] = useState(false);
+  const [interviewPhase, setInterviewPhase] = useState("idle");
+  const [userCredibility, setUserCredibility] = useState(100);
   const chatEndRef = useRef(null);
 
   // Roadmap States
@@ -685,61 +687,115 @@ export default function App() {
   const getInterviewQuestions = (role) => {
     const roleLower = (role || "Software Engineer").toLowerCase();
     
-    if (roleLower.includes("data") || roleLower.includes("ml") || roleLower.includes("machine") || roleLower.includes("intelligence") || roleLower.includes("backend")) {
+    // 1. Frontend / Full Stack (Sankalan)
+    if (roleLower.includes("front") || roleLower.includes("full") || roleLower.includes("stack") || roleLower.includes("sankalan")) {
       return [
         {
-          question: "What is the difference between supervised and unsupervised learning, and can you provide a real-world example of each?",
-          keywords: ["supervised", "unsupervised", "label", "labeled", "unlabeled", "clustering", "regression", "classification", "example", "predict"],
-          modelAnswer: "Supervised learning uses labeled training data to predict outputs (e.g., house price forecasting or email spam classification). Unsupervised learning works on unlabeled data to discover hidden patterns or groupings (e.g., customer segmentation clustering or anomaly detection).",
-          nextQuestion: "Can you explain the difference between L1 and L2 regularization, and when you would use one over the other?",
-          topic: "Supervised vs Unsupervised Learning"
+          question: "What is HTML, CSS, and JavaScript, and how do they work together to render a webpage?",
+          keywords: ["html", "css", "javascript", "js", "dom", "markup", "style", "behavior", "browser", "render"],
+          modelAnswer: "HTML provides the semantic structure of a webpage, CSS defines the visual design and layout styling, and JavaScript adds interactive and dynamic behavior. The browser parses the HTML to construct the DOM, applies CSS styles, and executes JavaScript to render the page.",
+          nextQuestion: "Can you explain React's Virtual DOM and how reconciliation works?",
+          topic: "Web Fundamentals",
+          difficulty: "beginner"
         },
         {
-          question: "Can you explain the difference between L1 and L2 regularization, and when you would use one over the other?",
-          keywords: ["l1", "l2", "lasso", "ridge", "sparsity", "absolute", "squared", "penalty", "feature selection", "overfitting"],
-          modelAnswer: "L1 regularization (Lasso) adds an absolute value penalty to the weights, forcing some coefficients to exactly zero, which acts as feature selection. L2 regularization (Ridge) adds a squared penalty, shrinking weights towards zero but not making them zero, which is ideal when you have many collinear features.",
-          nextQuestion: "How would you design a data pipeline to ingest 10 million real-time sensor events per second and store them for ML training?",
-          topic: "ML Regularization"
+          question: "Can you explain React's Virtual DOM and how reconciliation works?",
+          keywords: ["copy", "diff", "reconciliation", "memory", "reconcile", "dom", "render", "fast", "component", "state", "virtual"],
+          modelAnswer: "React maintains a lightweight copy of the real DOM in memory (the Virtual DOM). On state changes, it generates a new Virtual DOM tree, diffs it against the previous tree (reconciliation), and batches the required updates to the browser DOM to minimize expensive reflows.",
+          nextQuestion: "How do databases utilize indexes, and what is the difference between clustered and non-clustered indexes?",
+          topic: "React Virtual DOM",
+          difficulty: "intermediate"
         },
         {
-          question: "How would you design a data pipeline to ingest 10 million real-time sensor events per second and store them for ML training?",
-          keywords: ["kafka", "spark", "flink", "s3", "parquet", "batch", "stream", "queue", "partition", "ingest", "buffer"],
-          modelAnswer: "Use an ingestion broker like Apache Kafka or AWS Kinesis to buffer the incoming high-velocity data. Connect a stream processing engine like Spark Streaming or Flink to batch and partition the data, saving it in a compressed columnar format like Parquet inside cloud object storage (e.g. AWS S3) for optimal ML training speed.",
-          nextQuestion: "Can you explain what gradient vanishing is in Deep Learning and how to mitigate it?",
-          topic: "Data Pipeline Ingestion"
+          question: "How do databases utilize indexes, and what is the difference between clustered and non-clustered indexes?",
+          keywords: ["index", "clustered", "non-clustered", "b-tree", "search", "speed", "table", "pointer", "leaf"],
+          modelAnswer: "Indexes speed up data retrieval. A clustered index determines the physical order of data rows in a table (only one per table). A non-clustered index contains a separate structure of pointers to the physical rows, like an index at the back of a book.",
+          nextQuestion: "Can you explain REST vs GraphQL, and when you would choose one over the other?",
+          topic: "Database Indexing",
+          difficulty: "intermediate"
         },
         {
-          question: "Can you explain what gradient vanishing is in Deep Learning and how to mitigate it?",
-          keywords: ["vanishing", "gradient", "relu", "resnet", "activation", "sigmoid", "residual", "backpropagation", "batch norm", "normalization"],
-          modelAnswer: "Gradient vanishing occurs when gradients shrink exponentially during backpropagation in deep neural networks, making early layers learn very slowly. It can be mitigated using ReLU activations instead of Sigmoid, implementing residual connections (like in ResNet), and applying Batch Normalization.",
+          question: "Can you explain REST vs GraphQL, and when you would choose one over the other?",
+          keywords: ["rest", "graphql", "endpoint", "overfetching", "underfetching", "query", "schema", "flexible", "payload"],
+          modelAnswer: "REST exposes multiple fixed-structure endpoints where the payload structure is defined by the server. GraphQL exposes a single endpoint allowing the client to request exactly the fields it needs, preventing overfetching and underfetching.",
           nextQuestion: "",
-          topic: "Vanishing Gradients"
+          topic: "API Architectures",
+          difficulty: "hard"
         }
       ];
     }
     
-    // Default / Software Engineer questions
+    // 2. DevOps / Infra (Arnab)
+    if (roleLower.includes("devops") || roleLower.includes("sre") || roleLower.includes("infra") || roleLower.includes("cloud") || roleLower.includes("arnab")) {
+      return [
+        {
+          question: "What is a server, and what is the difference between static web hosting and a dynamic web server?",
+          keywords: ["server", "static", "dynamic", "html", "database", "node", "flask", "hosting", "s3", "compute"],
+          modelAnswer: "A server is a computer that delivers web assets. Static hosting serves pre-built HTML/CSS/JS files directly (e.g. from AWS S3). A dynamic server processes code at runtime (e.g. Flask/Node), queries databases, and compiles responses dynamically for each request.",
+          nextQuestion: "What is Infrastructure as Code (IaC) and what are the main benefits of using tools like Terraform?",
+          topic: "Server Concepts",
+          difficulty: "beginner"
+        },
+        {
+          question: "What is Infrastructure as Code (IaC) and what are the main benefits of using tools like Terraform?",
+          keywords: ["infrastructure", "iac", "terraform", "code", "automate", "declarative", "version", "provider", "state"],
+          modelAnswer: "Infrastructure as Code allows you to provision and manage IT resources programmatically. Terraform is a declarative IaC tool that tracks state, automates infrastructure builds, ensures consistent staging/production environments, and allows versioning.",
+          nextQuestion: "What is containerization, and why is Docker preferred over traditional Virtual Machines (VMs)?",
+          topic: "Infrastructure as Code",
+          difficulty: "intermediate"
+        },
+        {
+          question: "What is containerization, and why is Docker preferred over traditional Virtual Machines (VMs)?",
+          keywords: ["container", "docker", "vm", "virtual machine", "hypervisor", "kernel", "lightweight", "share", "guest os"],
+          modelAnswer: "Containerization packages applications with their dependencies. Docker is preferred over VMs because containers share the host OS kernel and run as isolated processes, making them lightweight, fast to boot, and memory-efficient compared to heavy VMs running full guest OSs.",
+          nextQuestion: "What is GitOps, and how does it automate release management in Kubernetes using tools like ArgoCD?",
+          topic: "Containerization",
+          difficulty: "intermediate"
+        },
+        {
+          question: "What is GitOps, and how does it automate release management in Kubernetes using tools like ArgoCD?",
+          keywords: ["gitops", "argocd", "git", "kubernetes", "k8s", "sync", "declarative", "reconcile", "pull"],
+          modelAnswer: "GitOps uses Git as the single source of truth for declarative infrastructure. ArgoCD polls Git config repositories and automatically syncs the live Kubernetes cluster state to match the declared repository configuration, reconciling drift instantly.",
+          nextQuestion: "",
+          topic: "GitOps Pipelines",
+          difficulty: "hard"
+        }
+      ];
+    }
+    
+    // 3. Backend / ML (Urshita & Fallback default)
     return [
       {
-        question: "Can you explain React's Virtual DOM and how reconciliation works?",
-        keywords: ["copy", "diff", "reconciliation", "memory", "reconcile", "dom", "render", "fast", "component", "state", "virtual"],
-        modelAnswer: "React maintains a lightweight copy of the real DOM in memory (the Virtual DOM). On state changes, it generates a new Virtual DOM tree, diffs it against the previous tree (reconciliation), and batches the required updates to the browser DOM to minimize expensive reflows.",
-        nextQuestion: "How would you design a robust database fallback strategy in a Flask API when your primary MongoDB database is unreachable, ensuring absolute system availability?",
-        topic: "React Virtual DOM"
+        question: "What is the difference between supervised and unsupervised learning, and can you provide a real-world example of each?",
+        keywords: ["supervised", "unsupervised", "label", "labeled", "unlabeled", "clustering", "regression", "classification", "example", "predict"],
+        modelAnswer: "Supervised learning uses labeled training data to predict outputs (e.g., house price forecasting or email spam classification). Unsupervised learning works on unlabeled data to discover hidden patterns or groupings (e.g., customer segmentation clustering or anomaly detection).",
+        nextQuestion: "Can you explain the difference between L1 and L2 regularization, and when you would use one over the other?",
+        topic: "Supervised vs Unsupervised Learning",
+        difficulty: "beginner"
       },
       {
-        question: "How would you design a robust database fallback strategy in a Flask API when your primary MongoDB database is unreachable, ensuring absolute system availability?",
-        keywords: ["fallback", "cache", "local", "json", "offline", "redis", "write", "backup", "try", "except", "retry"],
-        modelAnswer: "Wrap MongoDB connections in try-except clauses. If unreachable, trigger a fallback mechanism that writes transactions to a local fallback file (like `mock_db.json`) or a fast local cache like Redis, then spawn a background thread to retry connection and sync data once MongoDB is online.",
-        topic: "Database Fallback Strategy",
-        nextQuestion: "Why is containerization (Docker) crucial for a modern full-stack web application, and how does it prevent the 'it works on my machine' bug?"
+        question: "Can you explain the difference between L1 and L2 regularization, and when you would use one over the other?",
+        keywords: ["l1", "l2", "lasso", "ridge", "sparsity", "absolute", "squared", "penalty", "feature selection", "overfitting"],
+        modelAnswer: "L1 regularization (Lasso) adds an absolute value penalty to the weights, forcing some coefficients to exactly zero, which acts as feature selection. L2 regularization (Ridge) adds a squared penalty, shrinking weights towards zero but not making them zero, which is ideal when you have many collinear features.",
+        nextQuestion: "How would you design a data pipeline to ingest 10 million real-time sensor events per second and store them for ML training?",
+        topic: "ML Regularization",
+        difficulty: "intermediate"
       },
       {
-        question: "Why is containerization (Docker) crucial for a modern full-stack web application, and how does it prevent the 'it works on my machine' bug?",
-        keywords: ["docker", "container", "image", "environment", "dependency", "same", "isolate", "portability", "works"],
-        modelAnswer: "Docker packages the application code, dependencies, libraries, runtime environment, and configurations into a single standardized container image. Because the container carries its own environment, it executes identically across local development, staging, and live production environments.",
-        topic: "Docker Containerization",
-        nextQuestion: ""
+        question: "How would you design a data pipeline to ingest 10 million real-time sensor events per second and store them for ML training?",
+        keywords: ["kafka", "spark", "flink", "s3", "parquet", "batch", "stream", "queue", "partition", "ingest", "buffer"],
+        modelAnswer: "Use an ingestion broker like Apache Kafka or AWS Kinesis to buffer the incoming high-velocity data. Connect a stream processing engine like Spark Streaming or Flink to batch and partition the data, saving it in a compressed columnar format like Parquet inside cloud object storage (e.g. AWS S3) for optimal ML training speed.",
+        nextQuestion: "Can you explain what gradient vanishing is in Deep Learning and how to mitigate it?",
+        topic: "Data Pipeline Ingestion",
+        difficulty: "hard"
+      },
+      {
+        question: "Can you explain what gradient vanishing is in Deep Learning and how to mitigate it?",
+        keywords: ["vanishing", "gradient", "relu", "resnet", "activation", "sigmoid", "residual", "backpropagation", "batch norm", "normalization"],
+        modelAnswer: "Gradient vanishing occurs when gradients shrink exponentially during backpropagation in deep neural networks, making early layers learn very slowly. It can be mitigated using ReLU activations instead of Sigmoid, implementing residual connections (like in ResNet), and applying Batch Normalization.",
+        nextQuestion: "",
+        topic: "Vanishing Gradients",
+        difficulty: "hard"
       }
     ];
   };
@@ -750,34 +806,20 @@ export default function App() {
     setInterviewChat([]);
     setLastFeedback(null);
     setMockQuestionIndex(0);
+    setUserCredibility(100);
     setIsWaitingForTutorQuestion(false);
 
-    try {
-      const res = await fetch(`${API_BASE}/interview/start`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ analysis_id: selectedAnalysis.id, target_role: targetRole })
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setInterviewId(data.interview_id);
-        setInterviewChat([{ role: "interviewer", content: data.question }]);
-      } else {
-        throw new Error("Failed");
-      }
-    } catch (err) {
-      console.log("Mocking interview engine...");
-      const questionsList = getInterviewQuestions(targetRole);
-      setTimeout(() => {
-        setInterviewId("mock-int-123");
-        setInterviewChat([
-          { role: "interviewer", content: `Welcome ${selectedAnalysis.analysis.applicant_name} to your Sandbox AI technical interview for '${targetRole}'. Let's start with your first core topic. ${questionsList[0].question}` }
-        ]);
-        setIsStartingInterview(false);
-      }, 1200);
-      return;
-    }
-    setIsStartingInterview(false);
+    setTimeout(() => {
+      setInterviewId("session-" + Date.now());
+      setInterviewPhase("intro");
+      setInterviewChat([
+        { 
+          role: "interviewer", 
+          content: `Hello ${selectedAnalysis.analysis.applicant_name}, hope you are doing well. Tell me something about you?` 
+        }
+      ]);
+      setIsStartingInterview(false);
+    }, 600);
   };
 
   const isCasualOrConversational = (text) => {
@@ -1429,10 +1471,93 @@ What specific aspect of **${detectedTopic}** would you like to design, write a c
       setTimeout(() => {
         const lowerAnswer = answerText.toLowerCase();
 
-        // Standard Active Question (if within bounds)
+        // ==========================================
+        // PHASE 1: "intro" (Tell me about yourself)
+        // ==========================================
+        if (interviewPhase === "intro") {
+          setInterviewPhase("confirm_start");
+          setLastFeedback({
+            feedback: `Saved user introduction: "${answerText}"`,
+            score: "MOCK",
+            modelAnswer: "Let's proceed to the actual technical evaluation questions."
+          });
+          const nextQuestionText = `[AI Lead Interviewer]: Understood! Thank you for the introduction. Should I start the interview preparation?`;
+          setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+          setIsSubmittingAnswer(false);
+          return;
+        }
+
+        // ==========================================
+        // PHASE 2: "confirm_start" (Yes/No start check)
+        // ==========================================
+        if (interviewPhase === "confirm_start") {
+          const isYes = lowerAnswer === "yes" || lowerAnswer.includes("yes") || lowerAnswer.includes("yep") || lowerAnswer.includes("sure") || lowerAnswer.includes("ready") || lowerAnswer.includes("start") || lowerAnswer.includes("ok") || lowerAnswer.includes("lets go") || lowerAnswer.includes("let's go") || lowerAnswer.includes("begin") || lowerAnswer.includes("go");
+          
+          if (isYes) {
+            setInterviewPhase("active");
+            setMockQuestionIndex(0);
+            const activeQ = questionsList[0];
+            setLastFeedback({
+              feedback: "Confirmed start of interview.",
+              score: "MOCK",
+              modelAnswer: activeQ.modelAnswer
+            });
+            const nextQuestionText = `[AI Lead Interviewer]: Perfect! Let's start the technical interview. Here is your first question:
+            
+"${activeQ.question}"`;
+            setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+          } else {
+            setInterviewPhase("ask_tutor");
+            const nextQuestionText = `[AI Lead Interviewer]: Ok! Tell me what you want to ask then we should proceed.`;
+            setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+          }
+          setIsSubmittingAnswer(false);
+          return;
+        }
+
+        // ==========================================
+        // PHASE 3: "ask_tutor" (Wait for user questions when not ready)
+        // ==========================================
+        if (interviewPhase === "ask_tutor") {
+          const wantsToStart = lowerAnswer === "yes" || lowerAnswer.includes("yes") || lowerAnswer.includes("yep") || lowerAnswer.includes("sure") || lowerAnswer.includes("ready") || lowerAnswer.includes("start") || lowerAnswer.includes("ok") || lowerAnswer.includes("lets go") || lowerAnswer.includes("let's go") || lowerAnswer.includes("begin") || lowerAnswer.includes("go");
+          
+          if (wantsToStart) {
+            setInterviewPhase("active");
+            setMockQuestionIndex(0);
+            const activeQ = questionsList[0];
+            setLastFeedback({
+              feedback: "Confirmed start of interview.",
+              score: "MOCK",
+              modelAnswer: activeQ.modelAnswer
+            });
+            const nextQuestionText = `[AI Lead Interviewer]: Excellent! Let's start the technical interview. Here is your first question:
+            
+"${activeQ.question}"`;
+            setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+          } else {
+            let tutorExplanation = generateConversationalResponse(answerText, targetRole, interviewChat);
+            setLastFeedback({
+              feedback: `AI Tutor explained: "${answerText}"`,
+              score: "TUTOR",
+              modelAnswer: tutorExplanation
+            });
+            const nextQuestionText = `[AI Lead Interviewer]: Of course! Here is your explanation:
+            
+[AI Career Tutor]: ${tutorExplanation}
+
+Should I start the interview preparation?`;
+            setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
+          }
+          setIsSubmittingAnswer(false);
+          return;
+        }
+
+        // ==========================================
+        // PHASE 4: "active" (Technical interview rounds)
+        // ==========================================
         const currentQ = mockQuestionIndex < questionsList.length ? questionsList[mockQuestionIndex] : null;
 
-        // Intercept explicit requests for a question to prevent them being treated as a technical topic definition
+        // Custom topic switch request check
         const isRequestingQuestion = 
           (lowerAnswer.includes("question") && (
             lowerAnswer.includes("give") || 
@@ -1502,7 +1627,6 @@ What specific aspect of **${detectedTopic}** would you like to design, write a c
                 const nextQuestionText = `[AI Lead Interviewer]: Understood! Here is the next question for you: "${nextQ.question}"`;
                 setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
               } else {
-                // Loop back to the first question
                 setMockQuestionIndex(0);
                 const firstQ = questionsList[0];
                 setLastFeedback({
@@ -1519,7 +1643,7 @@ What specific aspect of **${detectedTopic}** would you like to design, write a c
           return;
         }
 
-        // 1. Navigation check while inside Tutor Lock state (MUST run first to intercept 'skip', 'next', 'continue', 'resume')
+        // Navigation check while inside Tutor Lock state (MUST run first to intercept 'skip', 'next', 'continue', 'resume')
         if (isWaitingForTutorQuestion) {
           if (lowerAnswer.includes("continue") || lowerAnswer.includes("return") || lowerAnswer.includes("back") || lowerAnswer.includes("resume")) {
             setIsWaitingForTutorQuestion(false);
@@ -1558,9 +1682,6 @@ What specific aspect of **${detectedTopic}** would you like to design, write a c
               const nextQuestionText = `Fantastic! You have successfully completed your Sandbox mock interview rounds. You did an excellent job discussing advanced frontend, resilient backend fallbacks, and infrastructure portability!
               
 🎓 [AI Career Tutor Activated]: I can now act as your infinite tutoring assistant!
-
-In which question, coding problem, or framework concept (e.g. explain React hooks, SQL vs NoSQL, Git rebasing, or database indexing) should I help you or explain it to you?
-
 Just type whatever you want to learn next, or ask me: "ask me another question"!`;
               setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
             }
@@ -1569,7 +1690,7 @@ Just type whatever you want to learn next, or ask me: "ask me another question"!
           }
         }
 
-        // 2. Smart Conversational Guard: Check if the user is typing casual greetings, agreements, or fillers
+        // Smart Conversational Guard: Check if the user is typing casual greetings, agreements, or fillers
         if (currentQ && isCasualOrConversational(answerText)) {
           let tutorExplanation = generateConversationalResponse(answerText, targetRole, interviewChat);
           setLastFeedback({
@@ -1588,6 +1709,38 @@ Whenever you're ready, let's return to our active interview question:
           setIsSubmittingAnswer(false);
           return;
         }
+
+        // Explanation request check (skipping or explicit "dont know" / "explain" requests)
+        const isExplanationRequested = 
+          lowerAnswer === "dont know" ||
+          lowerAnswer === "don't know" ||
+          lowerAnswer.includes("i don't know") ||
+          lowerAnswer.includes("i dont know") ||
+          lowerAnswer.includes("i can't") ||
+          lowerAnswer.includes("i cant") ||
+          lowerAnswer.includes("cant do") ||
+          lowerAnswer.includes("can't do") ||
+          lowerAnswer === "cant" ||
+          lowerAnswer === "can't" ||
+          lowerAnswer === "no" ||
+          lowerAnswer === "nope" ||
+          lowerAnswer === "no idea" ||
+          lowerAnswer.includes("dont know you explain") ||
+          lowerAnswer.includes("don't know you explain") ||
+          lowerAnswer.includes("dont know, you explain") ||
+          lowerAnswer.includes("don't know, you explain") ||
+          lowerAnswer.includes("explain it to me") ||
+          lowerAnswer.includes("explain to me") ||
+          lowerAnswer.includes("explain in short") ||
+          lowerAnswer.includes("explain me in short") ||
+          lowerAnswer.includes("explain it") ||
+          lowerAnswer.includes("explain them") ||
+          lowerAnswer.includes("explain this") ||
+          lowerAnswer.includes("no idea") || 
+          lowerAnswer.includes("have no idea") || 
+          lowerAnswer === "explain" || 
+          lowerAnswer === "help" ||
+          (lowerAnswer.length < 5 && !lowerAnswer.includes("?") && !lowerAnswer.includes("go"));
 
         // Custom Question detection check (asking a question, query, or topic lookup)
         const isCustomQuestion = 
@@ -1612,41 +1765,9 @@ Whenever you're ready, let's return to our active interview question:
           lowerAnswer.includes("vs") ||
           lowerAnswer.includes("difference");
 
-        // Explanation request check (skipping or explicit "dont know" review requests)
-        const isExplanationRequested = 
-          lowerAnswer === "dont know" ||
-          lowerAnswer === "don't know" ||
-          lowerAnswer.includes("i don't know") ||
-          lowerAnswer.includes("i dont know") ||
-          lowerAnswer.includes("i can't") ||
-          lowerAnswer.includes("i cant") ||
-          lowerAnswer.includes("cant do") ||
-          lowerAnswer.includes("can't do") ||
-          lowerAnswer === "cant" ||
-          lowerAnswer === "can't" ||
-          lowerAnswer === "no" ||
-          lowerAnswer === "nope" ||
-          lowerAnswer === "no idea" ||
-          lowerAnswer.includes("dont know you explain") ||
-          lowerAnswer.includes("don't know you explain") ||
-          lowerAnswer.includes("dont know, you explain") ||
-          lowerAnswer.includes("don't know, you explain") ||
-          lowerAnswer.includes("explain it to me") ||
-          lowerAnswer.includes("explain to me") ||
-          lowerAnswer.includes("explain in short") ||
-          lowerAnswer.includes("explain me in short") ||
-          lowerAnswer.includes("no idea") || 
-          lowerAnswer.includes("have no idea") || 
-          lowerAnswer === "explain" || 
-          lowerAnswer === "help" ||
-          (lowerAnswer.length < 5 && !lowerAnswer.includes("?") && !lowerAnswer.includes("go"));
-
-        // Case A: User explicitly asks a custom question (instant answer resolution)
         if (isCustomQuestion && !isExplanationRequested) {
           setIsWaitingForTutorQuestion(true); // Lock state
-          
           let tutorExplanation = generateConversationalResponse(answerText, targetRole, interviewChat);
-          
           setLastFeedback({
             feedback: `You asked a question: "${answerText}"`,
             score: "TUTOR",
@@ -1674,6 +1795,10 @@ What other question or coding problem would you like me to help you with? You ca
         // Case B: User says "dont know" / requests explanation for current question (Review lock mode)
         if (isExplanationRequested && currentQ) {
           setIsWaitingForTutorQuestion(true); // Lock state
+          
+          // Format model answer with points for clean visual rendering (bullet points)
+          const sentences = currentQ.modelAnswer.split(". ").filter(s => s.trim().length > 0);
+          const bulletExplanation = sentences.map((s, idx) => `• **Point ${idx + 1}**: ${s.trim()}${s.endsWith('.') ? '' : '.'}`).join("\n");
 
           setLastFeedback({
             feedback: `You requested an explanation for our active topic: "${currentQ.topic}"`,
@@ -1681,9 +1806,10 @@ What other question or coding problem would you like me to help you with? You ca
             modelAnswer: currentQ.modelAnswer
           });
 
-          const explanationResponse = `[AI Lead Interviewer]: No worries, let's learn this concept! Here is the detailed explanation for our active question:
+          const explanationResponse = `[AI Lead Interviewer]: No worries, let's learn this concept! Here is the detailed explanation broken down in easy points:
 
-📌 **${currentQ.topic}**:\n${currentQ.modelAnswer}
+📌 **${currentQ.topic} Explanation**:
+${bulletExplanation}
 
 Feel free to ask any follow-up questions about this topic, or type **"next"** or **"skip"** to proceed to the next interview round!`;
 
@@ -1701,19 +1827,33 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
           let evaluatedFeedback = "";
           let prefixTransition = "";
           
+          // ADAPTIVE INTERVIEW PROGRESSION: Determine score based on correctness
+          let nextIndex = mockQuestionIndex;
+          
           if (matchRatio >= 0.5) {
             calculatedScore = 9;
-            evaluatedFeedback = `Superb! Your explanation of "${currentQ.topic}" shows deep engineering maturity. You accurately discussed crucial mechanisms like ${matchedKeywords.join(", ")}. It is clear you understand how to build and scale this in production.`;
-            prefixTransition = `Excellent response! You hit all key technical dimensions of ${currentQ.topic}.`;
+            evaluatedFeedback = `Superb! Your explanation of "${currentQ.topic}" shows deep engineering maturity. You accurately discussed crucial mechanisms like ${matchedKeywords.join(", ")}.`;
+            prefixTransition = `Excellent response! You hit all key technical dimensions.`;
+            
+            // Answered well -> Advance to the next question
+            nextIndex = mockQuestionIndex + 1;
+            setUserCredibility(prev => Math.min(100, prev + 10)); // Increase credibility
           } else if (matchRatio >= 0.2) {
             calculatedScore = 6;
             const missingKeywords = currentQ.keywords.filter(kw => !lowerAnswer.includes(kw));
-            evaluatedFeedback = `Solid start! You correctly mentioned key elements like "${matchedKeywords.join(", ")}". However, to make this response truly recruiter-grade, you should expand on the architectural details regarding: ${missingKeywords.slice(0, 3).join(", ")}. Review the model answer below for the complete structure!`;
-            prefixTransition = "Got it, that is a reasonable summary with good core highlights.";
+            evaluatedFeedback = `Solid start! You correctly mentioned elements like "${matchedKeywords.join(", ")}". To make this response fully robust, expand on: ${missingKeywords.slice(0, 2).join(", ")}.`;
+            prefixTransition = "Got it, that is a reasonable summary.";
+            
+            // Acceptable answer -> Advance to the next question
+            nextIndex = mockQuestionIndex + 1;
+            setUserCredibility(prev => Math.min(100, prev + 5));
           } else {
             calculatedScore = 3;
-            evaluatedFeedback = `Your response is a bit brief for a senior-level technical round. While assessing "${currentQ.topic}", it is essential to discuss system trade-offs, B-Tree indices, or runtime properties. Try to incorporate keywords like: ${currentQ.keywords.slice(0, 4).join(", ")}. Let's review the standard production model answer key below!`;
-            prefixTransition = "Understood. That's a brief outline of the topic.";
+            evaluatedFeedback = `Your response is brief. For "${currentQ.topic}", it is essential to discuss system trade-offs. Try to incorporate keywords like: ${currentQ.keywords.slice(0, 3).join(", ")}. Let's review it.`;
+            prefixTransition = "Understood. That's a brief outline.";
+            
+            // Answered poorly -> Stay on same difficulty, keep same question (or retry with a hint) to adapt to user's pacing!
+            setUserCredibility(prev => Math.max(10, prev - 15)); // Decrease credibility
           }
           
           setLastFeedback({
@@ -1723,32 +1863,35 @@ Feel free to ask any follow-up questions about this topic, or type **"next"** or
           });
 
           let nextQuestionText = "";
-          const nextIndex = mockQuestionIndex + 1;
           
-          if (nextIndex < questionsList.length) {
-            const nextQ = questionsList[nextIndex];
-            nextQuestionText = `${prefixTransition} Let's move on. Here is the next question: "${nextQ.question}"`;
+          // Adaptive flow check: if answered poorly, prompt them to try again with a hint
+          if (calculatedScore === 3) {
+            nextQuestionText = `${prefixTransition}\n\n[AI Lead Interviewer]: Your answer could be more complete. Let's try this question again with a hint: **Try discussing key terms like ${currentQ.keywords.slice(0, 2).join(" or ")}.**\n\nQuestion: "${currentQ.question}"`;
           } else {
-            nextQuestionText = `${prefixTransition}\n\nFantastic! You have successfully completed your Sandbox mock interview rounds. You did an excellent job discussing advanced frontend, resilient backend fallbacks, and infrastructure portability!\n\n🎓 [AI Career Tutor Activated]: I can now act as your infinite tutoring assistant!\n\nIn which question, coding problem, or framework concept (e.g. explain React hooks, SQL vs NoSQL, Git rebasing, or database indexing) should I help you or explain it to you?\n\nJust type whatever you want to learn next, or ask me: "ask me another question"!`;
+            // Answered well: move to next question index
+            if (nextIndex < questionsList.length) {
+              const nextQ = questionsList[nextIndex];
+              nextQuestionText = `${prefixTransition} Based on your strong performance, let's move to the next topic. Question: "${nextQ.question}"`;
+              setMockQuestionIndex(nextIndex);
+            } else {
+              nextQuestionText = `${prefixTransition}\n\nFantastic! You have successfully completed your Sandbox mock interview rounds. You did an excellent job!\n\n🎓 [AI Career Tutor Activated]: I can now act as your infinite tutoring assistant!\n\nJust type whatever you want to learn next, or ask me: "ask me another question"!`;
+              setMockQuestionIndex(nextIndex);
+            }
           }
           
           setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
-          setMockQuestionIndex(nextIndex);
           setIsSubmittingAnswer(false);
           return;
         }
 
-        // Infinite consultation tutor fallback (when all rounds are complete and no other condition was met)
+        // Infinite consultation tutor fallback
         let tutorExplanation = generateConversationalResponse(answerText, targetRole, interviewChat);
-        
         setLastFeedback({
           feedback: `AI Tutor mode evaluated query: "${answerText}"`,
           score: "TUTOR",
           modelAnswer: tutorExplanation
         });
-        
         const nextQuestionText = `[AI Career Tutor]: ${tutorExplanation}`;
-        
         setInterviewChat(prev => [...prev, { role: "interviewer", content: nextQuestionText }]);
         setIsSubmittingAnswer(false);
       }, 1500);
