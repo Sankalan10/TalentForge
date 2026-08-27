@@ -1030,8 +1030,8 @@ class GeminiService:
                     {
                         "week_range": "Weeks 1-4",
                         "title": f"High-Performance Foundations in {role_title}",
-                        "description": f"Establish core toolchains, environment parameters, and modular compiler configurations specific to {role_title} execution contexts to secure stable, scalable developer workspaces.",
-                        "skills_gained": [f"{base_role} Core Patterns", "System Tooling", "Modular Configurations"],
+                        "description": f"Establish core toolchains, environment parameters, and modular configurations specific to {role_title} execution contexts to secure stable, scalable workspaces.",
+                        "skills_gained": [f"{base_role} Core Patterns", f"{base_role} Tools Setup", "Modular Configuration"],
                         "suggested_actions": [f"Design a centralized configuration template for {base_role} module integration"],
                         "curated_resources": [
                             {
@@ -1043,9 +1043,9 @@ class GeminiService:
                     },
                     {
                         "week_range": "Weeks 5-8",
-                        "title": f"Advanced Integration & Data Sync Blocks",
+                        "title": f"Advanced Integration & {base_role} Sync Blocks",
                         "description": f"Program decoupled execution streams, secure data exchange bridges, and high-frequency communication protocols supporting high concurrency loads in {base_role} pipelines.",
-                        "skills_gained": ["Stream Processing", "Protocol Design", "Interface Isolation"],
+                        "skills_gained": [f"Advanced {base_role} Sync", "Integration Architecture", "Data Sync Protocols"],
                         "suggested_actions": ["Deploy an asynchronous communication coordinator with error verification guards"],
                         "curated_resources": [
                             {
@@ -1059,8 +1059,8 @@ class GeminiService:
                         "week_range": "Weeks 9-12",
                         "title": f"Production Operations & Automated Scaling",
                         "description": f"Configure automated testing suites, performance profiling runtimes, and continuous integration scripts to support secure {base_role} deployments.",
-                        "skills_gained": ["Continuous Integration (CI/CD)", "Memory Profiling", "Load Analytics"],
-                        "suggested_actions": ["Create a GitHub Actions workflow automating build test runs and alerting on failure events"],
+                        "skills_gained": [f"{base_role} Performance Audits", "Release Pipelines", "Automated Validation"],
+                        "suggested_actions": ["Create an automated release workflow testing build runs and alerting on failure events"],
                         "curated_resources": [
                             {
                                 "name": "DevOps Automation and Deployment",
@@ -1079,7 +1079,7 @@ class GeminiService:
                         "week_range": "Weeks 1-4",
                         "title": f"Enterprise Architecture & Design Layouts in {role_title}",
                         "description": f"Master domain modeling, design patterns, and structural layout configurations specifically utilized in modern {role_title} enterprise architectures.",
-                        "skills_gained": ["Domain Modeling", "Structural Abstraction", "Contract Design"],
+                        "skills_gained": [f"{base_role} Principles", f"{base_role} Schema Spec", "Architecture Layouts"],
                         "suggested_actions": [f"Map out a high-level design specification diagram detailing {base_role} dependencies"],
                         "curated_resources": [
                             {
@@ -1093,7 +1093,7 @@ class GeminiService:
                         "week_range": "Weeks 5-8",
                         "title": f"Middleware Pipelines & Distributed Orchestrations",
                         "description": f"Integrate load-balancing policies, failover caching modules, and message routing patterns to optimize latency performance across {base_role} services.",
-                        "skills_gained": ["Load Balancing", "Cache-Aside Patterns", "Distributed Pipelines"],
+                        "skills_gained": [f"Distributed {base_role} Systems", "Middleware Pipelines", "Resource Routing"],
                         "suggested_actions": ["Configure an isolated middleware router executing validation checks on inputs"],
                         "curated_resources": [
                             {
@@ -1107,7 +1107,7 @@ class GeminiService:
                         "week_range": "Weeks 9-12",
                         "title": f"End-to-End Auditing & Quality Verification",
                         "description": f"Deploy automated unit test runner modules, static lint checkers, and security validation guards to protect {base_role} deployment pipelines.",
-                        "skills_gained": ["Automated Test Suites", "Lint & Code Style Audits", "Security Controls"],
+                        "skills_gained": [f"{base_role} Verification", "Continuous Auditing", "Compliance Controls"],
                         "suggested_actions": ["Integrate automated pull-request validation scanners checking for dependency vulnerabilities"],
                         "curated_resources": [
                             {
@@ -1127,7 +1127,7 @@ class GeminiService:
                         "week_range": "Weeks 1-4",
                         "title": f"Operational Workspace & Lifecycle Setup in {role_title}",
                         "description": f"Configure development environments, package managers, and automated task runners to establish standardized {role_title} deployment workflows.",
-                        "skills_gained": ["Environment Setup", "Package Control", "Task Runners"],
+                        "skills_gained": [f"{base_role} Workspaces", "Task Runners", "Package Management"],
                         "suggested_actions": [f"Configure a customizable build toolchain automating local {base_role} environment setup"],
                         "curated_resources": [
                             {
@@ -1141,7 +1141,7 @@ class GeminiService:
                         "week_range": "Weeks 5-8",
                         "title": f"State Synchronization & Resource Management",
                         "description": f"Handle structural state mutations, compute diff reconciliation tables, and optimize memory allocations under high database load for {base_role} systems.",
-                        "skills_gained": ["State Reconciliation", "Memory Optimization", "Connection Pools"],
+                        "skills_gained": [f"{base_role} State Synchronization", "Memory Tuning", "Connection Managers"],
                         "suggested_actions": ["Construct a memory pool coordinator dynamically recycling inactive system resources"],
                         "curated_resources": [
                             {
@@ -1155,7 +1155,7 @@ class GeminiService:
                         "week_range": "Weeks 9-12",
                         "title": f"Deployment Pipelines & Cloud Release CD",
                         "description": f"Configure secure static CDN routing, multi-region cluster deployments, and automated release scripts to streamline developer velocity for {base_role}.",
-                        "skills_gained": ["Cloud Architecture", "Edge Routing (CDNs)", "Automated Deployments"],
+                        "skills_gained": [f"Production {base_role} Deployments", "Release Management", "Cloud Monitoring"],
                         "suggested_actions": ["Deploy a multi-service hosting configuration script reporting live health check codes"],
                         "curated_resources": [
                             {

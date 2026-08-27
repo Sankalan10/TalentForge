@@ -126,11 +126,29 @@ class DBService:
                         "why": "Establishes a solid quantifiable metric."
                     }
                 ],
-                "missing_skills": {
-                    "critical": ["Docker / Containerization", "AWS / Cloud Deployments"],
-                    "recommended": ["TypeScript", "Redis Caching"],
-                    "optional": ["GraphQL", "Tailwind CSS v4"]
-                }
+                "missing_skills": (
+                    {
+                        "critical": ["Kubernetes / MLOps", "Apache Spark / Big Data"],
+                        "recommended": ["PyTorch Lightning", "NoSQL Clustering"],
+                        "optional": ["FastAPI", "MLflow Trackings"]
+                    } if "urshita" in analysis_id else (
+                        {
+                            "critical": ["ArgoCD / GitOps", "Prometheus / Service Meshes"],
+                            "recommended": ["Terraform Drift Management", "Chaos Engineering"],
+                            "optional": ["Ansible Automation", "Istio Routing"]
+                        } if "arnab" in analysis_id else (
+                            {
+                                "critical": ["Next.js / App Router", "TypeScript / Type Safety"],
+                                "recommended": ["Zustand Caching", "Tailwind v4 Configurations"],
+                                "optional": ["Playwright Testing", "Lighthouse Audits"]
+                            } if "sankalan" in analysis_id or name.lower() == "sankalan" else {
+                                "critical": ["Docker / Containerization", "AWS / Cloud Deployments"],
+                                "recommended": ["TypeScript", "Redis Caching"],
+                                "optional": ["GraphQL", "Tailwind CSS v4"]
+                            }
+                        )
+                    )
+                )
             }
         }
 
