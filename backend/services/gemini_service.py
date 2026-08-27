@@ -743,6 +743,356 @@ class GeminiService:
                 ]
             }
 
+        # 6.5. Quality Assurance / SDET Pathway
+        if any(kw in role_lower for kw in ["qa", "test", "sdet", "automation engineer"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Automation Basics & Web Testing",
+                        "description": "Learn modern automation frameworks like Selenium, Playwright, or Cypress to write robust E2E test suites for web applications.",
+                        "skills_gained": ["Playwright/Cypress", "E2E Testing", "CSS Selectors & Locators", "Assertions"],
+                        "suggested_actions": ["Write a complete automated flow to test logging in, routing, and adding elements to a list", "Establish clean Page Object Model design patterns for test scripts"],
+                        "curated_resources": [
+                            {
+                                "name": "Playwright Automation Handbook",
+                                "type": "Documentation",
+                                "link": "https://playwright.dev/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "API Testing, Mocking & Verification",
+                        "description": "Master automated API testing tools (Postman, Supertest, RestAssured) to validate REST endpoint payloads, HTTP status codes, and database responses.",
+                        "skills_gained": ["API Mocking", "JSON Schema Validation", "Postman scripting", "Integration Testing"],
+                        "suggested_actions": ["Create an automated collection in Postman validating a CRUD REST API with variable assertions", "Configure mock backend responses to test frontend error boundaries"],
+                        "curated_resources": [
+                            {
+                                "name": "REST API Testing Crash Course",
+                                "type": "Free Course",
+                                "link": "https://roadmap.sh/qa"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "Continuous Integration (CI/CD) & Load Audits",
+                        "description": "Integrate test runner pipelines directly into GitHub Actions or Jenkins. Execute stress and load testing using JMeter or k6 to find latency bottlenecks.",
+                        "skills_gained": ["GitHub Actions pipelines", "Load Testing (k6/JMeter)", "Report Generation", "Vulnerability scanning"],
+                        "suggested_actions": ["Set up a GitHub Actions workflow that executes all unit and E2E tests automatically on pull request triggers", "Write a k6 script simulating 500 concurrent users accessing your API and graph latency"],
+                        "curated_resources": [
+                            {
+                                "name": "Load Testing with k6 Guide",
+                                "type": "Official Tutorial",
+                                "link": "https://k6.io/docs/"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 6.6. Game Developer Pathway
+        if any(kw in role_lower for kw in ["game", "unity", "unreal", "graphics", "3d"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Game Engine Mechanics & Scripting Foundations",
+                        "description": "Master the core programming interfaces of Unity (C#) or Unreal Engine (C++). Understand scenes, objects, transforms, and game loop lifecycles.",
+                        "skills_gained": ["Unity C# / Unreal C++", "Transform Manipulation", "Vector Mathematics", "Input Systems"],
+                        "suggested_actions": ["Create a 2D/3D physics-based character controller handling walk, jump, and dash inputs", "Build a dynamic game state manager to handle main menus, pausing, and levels"],
+                        "curated_resources": [
+                            {
+                                "name": "Unity Learn Foundations Pathway",
+                                "type": "Official Interactive Pathway",
+                                "link": "https://learn.unity.com/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "3D Physics, Animation States & Interface Layouts",
+                        "description": "Integrate rigidbodies, collision matrices, raycasting, and keyframe state machines (Animators). Build modular UI panels for health points and inventory management.",
+                        "skills_gained": ["Rigidbody Collision", "Raycasting", "Animator State Machines", "Canvas UI Systems"],
+                        "suggested_actions": ["Build an item-pickup system trigger using Raycast vectors", "Create a smooth animation blend tree for walking, running, and jumping states"],
+                        "curated_resources": [
+                            {
+                                "name": "Unreal Engine 3D Graphics Guide",
+                                "type": "Documentation",
+                                "link": "https://dev.epicgames.com/community/unreal-engine"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "Audio Systems, Game Optimization & Release Builds",
+                        "description": "Profile game performance, debug memory leaks from redundant updates, and write custom GPU Shaders. Package executable game builds for Steam or mobile consoles.",
+                        "skills_gained": ["Profiler Analysis", "Shader Programming", "Audio Mixing", "Build Compilations"],
+                        "suggested_actions": ["Use the Unity/Unreal Profiler to resolve draw call overhead and batch duplicate static meshes", "Compile a standalone executable game bundle, testing graphics quality toggles"],
+                        "curated_resources": [
+                            {
+                                "name": "Game Developer Optimization Guide - roadmap.sh",
+                                "type": "Reference Map",
+                                "link": "https://roadmap.sh"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 6.7. Embedded Systems / IoT Pathway
+        if any(kw in role_lower for kw in ["embedded", "iot", "firmware", "hardware", "arduino", "raspberry", "mcu"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Low-Level Programming & Microcontroller Architectures",
+                        "description": "Master C/C++ memory architectures (pointers, bitwise operations, structures) specifically tailored to Microcontroller Units (MCUs). Understand memory map layouts and registers.",
+                        "skills_gained": ["Bitwise C/C++ Operations", "Register Manipulation", "MCU Memory Architecture", "Toolchains"],
+                        "suggested_actions": ["Write a register-level firmware program to toggle GPIO pins (Blink LED) without using high-level libraries", "Create a software debouncing algorithm for a physical hardware push button interrupt"],
+                        "curated_resources": [
+                            {
+                                "name": "Embedded Systems Foundations - freeCodeCamp",
+                                "type": "Free Course",
+                                "link": "https://www.youtube.com/watch?v=3V9eqskGPgY"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "Hardware Communication Protocols & Sensors Interfacing",
+                        "description": "Interface sensors and external memory using industry-standard serial communication protocols: I2C, SPI, UART, and analog-to-digital converters (ADC).",
+                        "skills_gained": ["I2C Protocols", "SPI Protocols", "UART Communication", "ADC Ingestion"],
+                        "suggested_actions": ["Write a library to fetch temperature and humidity data from an I2C sensor (e.g. DHT22/BMP280)", "Send real-time debug data back to a computer console using a UART serial interface"],
+                        "curated_resources": [
+                            {
+                                "name": "Serial Communication Manuals",
+                                "type": "Reference Documentation",
+                                "link": "https://roadmap.sh"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "Real-Time Operating Systems (RTOS) & Oscilloscope Testing",
+                        "description": "Develop multi-task firmware utilizing an RTOS (FreeRTOS) to manage task priorities, semaphores, and queues. Debug physical lines with logical analyzers and oscilloscopes.",
+                        "skills_gained": ["FreeRTOS Scheduling", "Semaphores & Queues", "Logical Analyzers", "Power Profiling"],
+                        "suggested_actions": ["Configure a FreeRTOS project running two tasks: sensor polling and OLED display drawing, using mutex locks", "Trace serial lines with an oscilloscope to diagnose protocol timing noise"],
+                        "curated_resources": [
+                            {
+                                "name": "FreeRTOS Official Reference Manual",
+                                "type": "Documentation",
+                                "link": "https://www.freertos.org/"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 6.8. UI/UX & Product Design Pathway
+        if any(kw in role_lower for kw in ["design", "ux", "ui", "figma", "illustrator"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Figma Design Systems & Typography Foundations",
+                        "description": "Master color harmony theory, typography scaling grids, grid layouts, and advanced Figma capabilities (Auto Layout, component variants, and design variables).",
+                        "skills_gained": ["Figma Autolayout", "Component Variants", "Design Systems", "Visual Hierarchy"],
+                        "suggested_actions": ["Create a reusable, responsive UI component library including buttons, inputs, and cards", "Build a high-fidelity landing page layout adjusting seamlessly to mobile and desktop aspect ratios"],
+                        "curated_resources": [
+                            {
+                                "name": "Figma Design System Best Practices",
+                                "type": "Official Guides",
+                                "link": "https://help.figma.com/hc/en-us"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "User Research, Journey Maps & Wireframes",
+                        "description": "Conduct qualitative user research, compile target persona archetypes, analyze competitor platforms, and design low-fidelity structural user journey flow maps.",
+                        "skills_gained": ["User Interviews", "Competitor Auditing", "Wireframing", "Information Architecture"],
+                        "suggested_actions": ["Draft a user journey diagram mapping out target customer signups and checkout friction", "Develop structural wireframes for a complex dashboard focusing on optimal information delivery"],
+                        "curated_resources": [
+                            {
+                                "name": "UX Design Principles Guide - Nielsen Norman",
+                                "type": "Expert Articles",
+                                "link": "https://www.nngroup.com/articles/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "Interactive Prototypes, Usability Tests & Dev Handoffs",
+                        "description": "Animate screen transitions in Figma using Smart Animate. Conduct usability feedback interviews, iterate layouts, and organize developer-ready handoff specs.",
+                        "skills_gained": ["Figma Smart Animate", "Usability Testing", "Feedback Iteration", "Developer Handoff Specs"],
+                        "suggested_actions": ["Build an interactive, clickable mobile app prototype demonstrating complete page transitions and inputs", "Document all border sizes, color codes, and spacing variables as clear token definitions"],
+                        "curated_resources": [
+                            {
+                                "name": "Figma Dev Mode & Handoff Checklist",
+                                "type": "Official Tutorial",
+                                "link": "https://www.figma.com/resource-library/design-to-development-handoff/"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 6.9. Product / Project Management Pathway
+        if any(kw in role_lower for kw in ["product manager", "project manager", "scrum", "agile", "product owner"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Product Discovery, Target KPIs & PRD Authoring",
+                        "description": "Formulate strategic goals, identify target metric KPIs (North Star, retention, conversions), write detailed Product Requirement Documents (PRDs), and model user stories.",
+                        "skills_gained": ["PRD Writing", "KPI Metric Mapping", "User Story Mapping", "Customer Discovery"],
+                        "suggested_actions": ["Write a detailed PRD for a new collaborative feature, specifying scope boundaries and edge cases", "Establish customer survey loops to analyze product pain points and target feature benefits"],
+                        "curated_resources": [
+                            {
+                                "name": "Product Management Blueprint - roadmap.sh",
+                                "type": "Interactive Guide",
+                                "link": "https://roadmap.sh/product-manager"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "Agile Methodologies, Prioritization & Sprints Management",
+                        "description": "Master sprint management techniques. Prioritize features utilizing structured models (RICE, MoSCoW), write engineering tickets, and coordinate scrum meetings.",
+                        "skills_gained": ["Agile/Scrum Frameworks", "Backlog Grooming", "RICE Prioritization", "Jira Coordination"],
+                        "suggested_actions": ["Coordinate a sprint backlog, prioritizing tasks using RICE score calculations to determine developer scopes", "Translate high-level PRD scopes into clear Jira epic tickets and individual technical stories"],
+                        "curated_resources": [
+                            {
+                                "name": "Agile Scrum Alliance Reference Guide",
+                                "type": "Framework Guide",
+                                "link": "https://www.scrumalliance.org/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "Launch Operations, A/B Testing & Data Analytics",
+                        "description": "Coordinate go-to-market strategies. Instrument product analytics tools (Amplitude, Mixpanel, Google Analytics) and run statistically valid A/B testing campaigns.",
+                        "skills_gained": ["A/B Testing Experiments", "Amplitude/Mixpanel Analytics", "Go-To-Market Plans", "User Analytics"],
+                        "suggested_actions": ["Draft a go-to-market rollout timeline scheduling beta launches, marketing materials, and telemetry audits", "Establish Amplitude event trackers to analyze funnel completion and isolate friction points"],
+                        "curated_resources": [
+                            {
+                                "name": "Product Analytics Fundamentals - Amplitude",
+                                "type": "Learning Material",
+                                "link": "https://amplitude.com/academy"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 6.10. Data Analyst / BI Pathway
+        if any(kw in role_lower for kw in ["analyst", "analytics", "bi", "tableau", "power bi"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "SQL Query Optimization & Data Consolidation",
+                        "description": "Master structured data querying. Write advanced SQL queries utilizing INNER/OUTER JOINs, Subqueries, CTEs, Window functions, and indexes.",
+                        "skills_gained": ["SQL Joins & CTEs", "Window Functions", "Data Querying", "Database Aggregations"],
+                        "suggested_actions": ["Write an optimized SQL script analyzing customer cohorts and monthly spending metrics over time", "Audit query execute plans using EXPLAIN to optimize index selections and speed joins"],
+                        "curated_resources": [
+                            {
+                                "name": "SQL Learning Pathway - roadmap.sh",
+                                "type": "Interactive Guide",
+                                "link": "https://roadmap.sh/sql"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "Data Visualization & Dashboard Engineering",
+                        "description": "Translate database tables into interactive dashboards utilizing Business Intelligence tools (Tableau, PowerBI). Design metrics highlighting user retention and sales patterns.",
+                        "skills_gained": ["Tableau/PowerBI", "Dashboard UI Design", "Storytelling with Data", "ETL Pipelines"],
+                        "suggested_actions": ["Build an interactive Tableau dashboard containing conversion funnels, churn, and revenue charts", "Configure automated daily data refreshes linking your live database to the BI reports"],
+                        "curated_resources": [
+                            {
+                                "name": "Data Visualization Guide - Tableau",
+                                "type": "Training Guides",
+                                "link": "https://www.tableau.com/learn"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "Statistical Modeling & Python Analytics",
+                        "description": "Conduct deeper analytics and cohort profiling utilizing Python (Pandas, Jupyter Notebooks). Learn to design and analyze A/B testing metrics.",
+                        "skills_gained": ["Pandas Cohort Analysis", "A/B Testing Statistics", "Jupyter Notebooks", "Data Reports"],
+                        "suggested_actions": ["Conduct a statistical analysis on an A/B test sample, checking user conversions for statistically significant improvements", "Export database reports into clean, visual PDF layouts using Pandas and Matplotlib packages"],
+                        "curated_resources": [
+                            {
+                                "name": "Data Analysis with Python Course",
+                                "type": "Free Course",
+                                "link": "https://www.freecodecamp.org/news/data-analysis-with-python-course/"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 6.11. Blockchain / Web3 Developer Pathway
+        if any(kw in role_lower for kw in ["blockchain", "web3", "solidity", "smart contract", "crypto"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Smart Contracts Engineering & Cryptography Basics",
+                        "description": "Master Solidity programming language syntax and the Ethereum Virtual Machine (EVM). Learn secure coding standards, interfaces, and unit testing protocols.",
+                        "skills_gained": ["Solidity Programming", "EVM Basics", "Smart Contracts", "Cryptography Protocols"],
+                        "suggested_actions": ["Write and compile a standard ERC-20 token smart contract with custom mint/burn mechanisms", "Deploy local smart contract unit tests asserting variable boundaries utilizing Hardhat"],
+                        "curated_resources": [
+                            {
+                                "name": "CryptoZombies Solidity Tutorial",
+                                "type": "Interactive Game Course",
+                                "link": "https://cryptozombies.io/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "Web3 Client Interfacing & Local Hardhat Environments",
+                        "description": "Connect web applications directly to decentralized networks using Ethers.js or Web3.js libraries. Integrate Metamask wallet connections and transaction managers.",
+                        "skills_gained": ["Ethers.js / Web3.js", "Metamask Auth", "Transaction Subscriptions", "Hardhat Scripts"],
+                        "suggested_actions": ["Create a React client interfacing with a Solidity contract, updating values live on block updates", "Write Hardhat deployment scripts script testing transactions on a local network fork"],
+                        "curated_resources": [
+                            {
+                                "name": "Web3 Developer Guide - freeCodeCamp",
+                                "type": "Free Course",
+                                "link": "https://www.youtube.com/watch?v=gyMwXuJrbDT"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "Contract Auditing, IPFS Deployment & L2 Networks Scaling",
+                        "description": "Audit contracts against critical exploits (Reentrancy, Front-running, Overflow risks). Package decentralized client assets utilizing IPFS and scale on Layer-2 solutions.",
+                        "skills_gained": ["Smart Contract Auditing", "Reentrancy Protection", "IPFS Storage", "L2 Networks (Polygon)"],
+                        "suggested_actions": ["Conduct a security audit on a Solidity contract, patching potential reentrancy loops using checks-effects-interactions", "Upload frontend client assets to IPFS, accessing the decentralized portal using a gateway DNS"],
+                        "curated_resources": [
+                            {
+                                "name": "Ethereum Developer Roadmap - roadmap.sh",
+                                "type": "Interactive Guide",
+                                "link": "https://roadmap.sh/blockchain"
+                            }
+                        ]
+                    }
+                ]
+            }
+
         # 7. Fallback Dynamic Synthesized
         role_words = [w.capitalize() for w in role_lower.split(" ") if w.strip()]
         role_title = " ".join(role_words)
