@@ -4976,8 +4976,10 @@ ${resumeData.education}
                       <>
                         <div className="flex items-center justify-between flex-wrap gap-4">
                           <div>
-                            <h2 className="text-2xl font-black text-white tracking-tight">AI Skill Transition roadmap</h2>
-                            <p className="text-sm text-slate-400 mt-1 font-medium">bespoke developmental modules to scale your targeted engineering competencies.</p>
+                            <h2 className="text-2xl font-black text-white tracking-tight">
+                              {roadmap?.target_role || targetRole ? `${roadmap?.target_role || targetRole} Skill Transition Roadmap` : "AI Skill Transition Roadmap"}
+                            </h2>
+                            <p className="text-sm text-slate-400 mt-1 font-medium">Bespoke developmental modules to scale your targeted engineering competencies.</p>
                           </div>
                           {!roadmap && (
                             <div className="flex items-center gap-3">
