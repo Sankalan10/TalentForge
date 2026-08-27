@@ -351,48 +351,447 @@ class GeminiService:
         }
 
     def _get_mock_roadmap(self, target_role):
+        role_lower = (target_role or "Software Engineer").lower()
+        
+        # 1. Frontend Developer Pathway
+        if any(kw in role_lower for kw in ["frontend", "ui", "ux", "client", "designer"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Advanced Modern UI & State Architecture",
+                        "description": "Master component lifecycles, advanced React Hooks (useState, useEffect, useMemo, useCallback), and robust central state management using Redux Toolkit or Zustand.",
+                        "skills_gained": ["React.js", "Custom Hooks", "Zustand State Management", "Tailwind CSS v4"],
+                        "suggested_actions": ["Build a dynamic, responsive client dashboard with custom context providers", "Refactor standard inline styles to highly modular HSL tailwind configuration classes"],
+                        "curated_resources": [
+                            {
+                                "name": "React Hooks Deep Dive - freeCodeCamp",
+                                "type": "Free Course",
+                                "link": "https://www.freecodecamp.org/news/react-hooks-handbook/"
+                            },
+                            {
+                                "name": "Zustand State Management Guide",
+                                "type": "Official Docs",
+                                "link": "https://zustand.docs.pmnd.rs/getting-started/introduction"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "Server-Side Frameworks & Rendering Orchestrations",
+                        "description": "Deep dive into Next.js frameworks, understanding Server vs Client Components, implementing Static Site Generation (SSG), Server-Side Rendering (SSR), and Incremental Static Regeneration (ISR) to secure optimal load speeds and SEO indexing.",
+                        "skills_gained": ["Next.js App Router", "Server-Side Rendering", "SEO & Metadata", "Lighthouse Optimization"],
+                        "suggested_actions": ["Migrate a client-side React App to a Next.js App Router project", "Improve site speed index, core web vitals, and accessibility under Lighthouse auditing"],
+                        "curated_resources": [
+                            {
+                                "name": "Next.js Interactive Roadmap - roadmap.sh",
+                                "type": "Interactive Pathway",
+                                "link": "https://roadmap.sh/nextjs"
+                            },
+                            {
+                                "name": "Web Vitals & Performance Checklist",
+                                "type": "Best Practices Guide",
+                                "link": "https://web.dev/vitals/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "End-to-End Auditing, Automated Testing & CD",
+                        "description": "Configure automated frontend continuous deployments to Vercel or Netlify. Master unit and component testing utilizing Vitest and advanced E2E automated user flow testing utilizing Playwright.",
+                        "skills_gained": ["Playwright E2E Testing", "Vitest Unit Testing", "Vercel CD Pipelines", "GitHub Actions"],
+                        "suggested_actions": ["Write comprehensive user flow and element visibility integration tests in Playwright", "Configure GitHub Actions workflow to run automated linting and tests on pull requests"],
+                        "curated_resources": [
+                            {
+                                "name": "Playwright E2E Automation Crash Course",
+                                "type": "Free Video Tutorial",
+                                "link": "https://www.youtube.com/watch?v=5yH_Roc67S4"
+                            },
+                            {
+                                "name": "Vercel Git Integration Deployment Guide",
+                                "type": "Documentation",
+                                "link": "https://vercel.com/docs/deployments/git"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 2. Backend Developer Pathway
+        if any(kw in role_lower for kw in ["backend", "server", "api", "database"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Robust Server Architectures & RESTful API Specs",
+                        "description": "Design and implement high-performance, modular API servers using Flask, Node/Express, or Django. Incorporate request parsing, validation, security headers, and centralized custom exception loggers.",
+                        "skills_gained": ["Flask/Express API Design", "Schema Validation", "CORS & Security Headers", "Middleware Pipelines"],
+                        "suggested_actions": ["Write a scalable RESTful API with route validation schemas", "Deploy a custom error response utility that logs server exceptions automatically"],
+                        "curated_resources": [
+                            {
+                                "name": "RESTful API Best Practices Guide",
+                                "type": "Technical Article",
+                                "link": "https://roadmap.sh/api"
+                            },
+                            {
+                                "name": "Flask API Development - freeCodeCamp",
+                                "type": "Free Course",
+                                "link": "https://www.freecodecamp.org/news/flask-api-development-course/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "Advanced Database Architectures & Query Tuning",
+                        "description": "Integrate relational (PostgreSQL) or non-relational (MongoDB) databases. Master ACID compliance, horizontal partitioning, schema models, query profiling, and O(log N) search indexes.",
+                        "skills_gained": ["PostgreSQL/MongoDB", "ACID Compliance", "Query Profiling", "Database Indexing"],
+                        "suggested_actions": ["Audit and profile slow queries, adding indexes to drop database scans from O(N) to O(log N) using indexing constraints", "Configure connection pooling to support concurrent client requests safely"],
+                        "curated_resources": [
+                            {
+                                "name": "Databases & Storage Paths - roadmap.sh",
+                                "type": "Interactive Learning",
+                                "link": "https://roadmap.sh/postgresql"
+                            },
+                            {
+                                "name": "MongoDB Indexes Official Manual",
+                                "type": "Documentation",
+                                "link": "https://www.mongodb.com/docs/manual/indexes/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "High-Speed In-Memory Caching & Task Queues",
+                        "description": "Optimize database load by engineering cache-aside architectures with Redis. Deploy asynchronous background task managers (Celery or BullMQ) to execute heavy tasks outside the request cycle.",
+                        "skills_gained": ["Redis Caching", "Celery/BullMQ Task Queues", "Asynchronous Processing", "Message Brokers"],
+                        "suggested_actions": ["Integrate a Redis cache layer on high-frequency server GET routes", "Configure BullMQ/Celery to handle bulk data analysis and email generation in the background"],
+                        "curated_resources": [
+                            {
+                                "name": "Redis Caching Patterns Guide",
+                                "type": "Official Tutorial",
+                                "link": "https://redis.io/docs/latest/develop/use/patterns/"
+                            },
+                            {
+                                "name": "Asynchronous Workflows with Celery",
+                                "type": "Best Practice Manual",
+                                "link": "https://docs.celeryq.dev/en/stable/getting-started/first-steps-with-celery.html"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 3. Data Science / ML / AI Engineer Pathway
+        if any(kw in role_lower for kw in ["ml", "machine", "data", "ai", "intelligence", "deep", "nlp", "analyst"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Applied Scientific Computing & High-Volume Data Ingestion",
+                        "description": "Master computational libraries (NumPy, Pandas, Polars) to parse, clean, filter, and analyze massive structured/unstructured datasets, and visualize insights utilizing Seaborn/Matplotlib.",
+                        "skills_gained": ["Pandas/Polars", "Data Wrangling", "Exploratory Data Analysis (EDA)", "Data Pipelines"],
+                        "suggested_actions": ["Build an automated data pipeline that ingests messy CSV/JSON logs and outputs standardized datasets", "Conduct a complete statistical profiling analysis on housing or applicant datasets"],
+                        "curated_resources": [
+                            {
+                                "name": "Data Science with Pandas - freeCodeCamp",
+                                "type": "Free Course",
+                                "link": "https://www.freecodecamp.org/news/pandas-data-science-tutorial/"
+                            },
+                            {
+                                "name": "Exploratory Data Analysis Guide",
+                                "type": "Technical Overview",
+                                "link": "https://roadmap.sh/ai"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "Supervised Modeling, Feature Engineering & Hyperparameter Tuning",
+                        "description": "Develop classification, regression, and clustering models using Scikit-Learn. Design custom feature scaling pipelines, evaluate performance metrics, and perform cross-validation tuning.",
+                        "skills_gained": ["Scikit-Learn Modeling", "Feature Engineering", "Cross-Validation", "GridSearchCV"],
+                        "suggested_actions": ["Train a Random Forest classifier and tune hyperparameters utilizing GridSearchCV for optimal AUC score", "Construct a pipeline to encode categorical data, scale numerical data, and impute missing values"],
+                        "curated_resources": [
+                            {
+                                "name": "Scikit-Learn Modeling Official Guide",
+                                "type": "Documentation",
+                                "link": "https://scikit-learn.org/stable/user_guide.html"
+                            },
+                            {
+                                "name": "Machine Learning Course - Kaggle",
+                                "type": "Free Course",
+                                "link": "https://www.kaggle.com/learn/intro-to-machine-learning"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "Deep Neural Networks & Production MLOps Deployment",
+                        "description": "Train neural networks (ANNs, CNNs) utilizing PyTorch. Transition models from notebook environments to production using Docker containerization, FastAPI web wrappers, and MLflow model registries.",
+                        "skills_gained": ["PyTorch Deep Learning", "Model APIs", "MLOps", "Model Packaging"],
+                        "suggested_actions": ["Build and evaluate an image classifier or text classification model using PyTorch neural layers", "Containerize your trained ML weight models inside a Docker instance and deploy as a REST API on Render"],
+                        "curated_resources": [
+                            {
+                                "name": "PyTorch for Deep Learning Course",
+                                "type": "Free Video Tutorial",
+                                "link": "https://www.youtube.com/watch?v=V_xro1bcAuA"
+                            },
+                            {
+                                "name": "MLOps Production Ingestion Guides",
+                                "type": "DevOps Reference",
+                                "link": "https://mlflow.org/docs/latest/index.html"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 4. DevOps Engineer / SRE Pathway
+        if any(kw in role_lower for kw in ["devops", "sre", "infra", "cloud", "admin", "platform"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Docker Packaging & Multi-Stage Production Containerization",
+                        "description": "Package full-stack applications with high efficiency. Master Dockerfiles, multi-stage builds to drop image sizes, docker volume mounts, network bridges, and multi-service orchestrations with Docker Compose.",
+                        "skills_gained": ["Docker Image Building", "Multi-stage Builds", "Docker Compose", "Persistent Storage"],
+                        "suggested_actions": ["Write a secure multi-stage Dockerfile that drops client build weights by 85%", "Configure a multi-service Docker Compose ecosystem including Flask, React, and MongoDB"],
+                        "curated_resources": [
+                            {
+                                "name": "Docker Containerization Fundamentals",
+                                "type": "Free Course",
+                                "link": "https://www.freecodecamp.org/news/what-is-docker-used-for-a-docker-container-tutorial-for-beginners/"
+                            },
+                            {
+                                "name": "Docker Compose Best Practices",
+                                "type": "Official Guide",
+                                "link": "https://docs.docker.com/compose/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "Infrastructure as Code (IaC) & Cloud Networks provisioning",
+                        "description": "Provision robust cloud networks programmatically utilizing HashiCorp Terraform. Set up virtual networks, compute instances, load balancers, database instances, and secure groups on AWS or GCP.",
+                        "skills_gained": ["Terraform IaC", "AWS Infrastructure", "Virtual Networks (VPC)", "Load Balancer Configs"],
+                        "suggested_actions": ["Write reusable Terraform modules to provision an EC2 server and link it to an S3 storage bucket", "Configure AWS security groups to allow strict HTTP/HTTPS access on designated ports"],
+                        "curated_resources": [
+                            {
+                                "name": "Terraform Cloud Provisioning Path",
+                                "type": "Official Docs",
+                                "link": "https://developer.hashicorp.com/terraform/tutorials"
+                            },
+                            {
+                                "name": "AWS Architecture & Deployment Guides",
+                                "type": "Interactive Map",
+                                "link": "https://roadmap.sh/devops"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "Container Orchestrations & Advanced Automated CI/CD pipelines",
+                        "description": "Scale applications globally using Kubernetes clusters. Configure automated continuous integration/continuous deployment pipelines utilizing GitHub Actions to auto-run unit tests, lint, and deploy.",
+                        "skills_gained": ["Kubernetes", "Helm Orchestrations", "CI/CD (GitHub Actions)", "System Monitoring"],
+                        "suggested_actions": ["Deploy an application cluster with replication using Kubernetes service and deployment YAMLs", "Set up a GitHub Actions workflow to build, test, and automatically push your latest build to AWS on git push"],
+                        "curated_resources": [
+                            {
+                                "name": "Kubernetes Orchestration Crash Course",
+                                "type": "Free Course",
+                                "link": "https://www.youtube.com/watch?v=X48VuDVv0do"
+                            },
+                            {
+                                "name": "GitHub Actions DevOps Automation",
+                                "type": "Documentation",
+                                "link": "https://docs.github.com/en/actions"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 5. Cybersecurity Analyst Pathway
+        if any(kw in role_lower for kw in ["cyber", "security", "pentest", "hacking", "threat", "infosec"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Network Security Audits & Packet Analysis",
+                        "description": "Master core computer network protocols (TCP/IP, DNS, TLS/SSL). Analyze packet captures in Wireshark and audit system ports and service versions utilizing Nmap.",
+                        "skills_gained": ["Network Security", "Wireshark Packet Analysis", "Nmap Port Audits", "Cryptography Fundamentals"],
+                        "suggested_actions": ["Capture and inspect HTTP vs HTTPS handshakes in Wireshark to understand encryption differences", "Run a network security scan using Nmap on a target sandbox environment to detect exposed ports"],
+                        "curated_resources": [
+                            {
+                                "name": "CompTIA Security+ Blueprint Course",
+                                "type": "Free Prep Course",
+                                "link": "https://www.freecodecamp.org/news/comptia-security-plus-course/"
+                            },
+                            {
+                                "name": "Wireshark Network Troubleshooting Guide",
+                                "type": "Documentation",
+                                "link": "https://www.wireshark.org/docs/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "Web Penetration Testing & OWASP Top 10 Audits",
+                        "description": "Understand critical web vulnerabilities (SQL Injections, Cross-Site Scripting (XSS), CSRF, Broken Authentications) outlined in the OWASP Top 10, and learn how to patch them securely.",
+                        "skills_gained": ["Penetration Testing", "OWASP Top 10 Auditing", "Vulnerability Remediation", "Web Sec Protocols"],
+                        "suggested_actions": ["Audit a web form to detect SQL Injection vulnerability, and remediate using parameterized SQL queries", "Configure secure, HTTP-only, SameSite cookie authentication sessions to protect against session hijacking"],
+                        "curated_resources": [
+                            {
+                                "name": "PortSwigger Web Security Academy",
+                                "type": "Interactive Lab Course",
+                                "link": "https://portswigger.net/web-security"
+                            },
+                            {
+                                "name": "OWASP Top 10 Critical Risks Guide",
+                                "type": "Security Standard",
+                                "link": "https://owasp.org/www-project-top-ten/"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "SecOps Pipeline Integration & Incident Detection",
+                        "description": "Deploy Security Information and Event Management (SIEM) log aggregators. Integrate automated SAST (Static Application Security Testing) checkers directly inside the development workflow.",
+                        "skills_gained": ["SIEM Systems", "SecOps & Logging", "DevSecOps (SAST)", "Firewall Policies"],
+                        "suggested_actions": ["Configure local firewalls using UFW or firewalld, logging audit triggers to SIEM dashboards", "Integrate automated security scanners (e.g. bandit, npm audit) into GitHub Actions pull request checks"],
+                        "curated_resources": [
+                            {
+                                "name": "DevSecOps Engineering Path - roadmap.sh",
+                                "type": "Interactive Map",
+                                "link": "https://roadmap.sh/devops"
+                            },
+                            {
+                                "name": "Introduction to Security Operations (SecOps)",
+                                "type": "Free Course",
+                                "link": "https://www.youtube.com/watch?v=uC93Xv7qW3k"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 6. Mobile App Developer Pathway
+        if any(kw in role_lower for kw in ["mobile", "app", "ios", "android", "flutter", "native", "phone"]):
+            return {
+                "target_role": target_role,
+                "milestones": [
+                    {
+                        "week_range": "Weeks 1-4",
+                        "title": "Mobile Framework Architectures & Responsive Screen Layouts",
+                        "description": "Learn core components of cross-platform (Flutter, React Native) or native (SwiftUI/Kotlin Jetpack Compose) frameworks. Master adaptive layouts and central state engines.",
+                        "skills_gained": ["React Native/Flutter", "Adaptive Mobile UI", "Mobile State Management", "Mobile Routing"],
+                        "suggested_actions": ["Design a cross-platform scrollable profile dashboard with responsive layouts for mobile and tablet", "Set up dynamic, hardware-accelerated screen transitions and multi-tier navigations"],
+                        "curated_resources": [
+                            {
+                                "name": "React Native Mobile Dev Guide - freeCodeCamp",
+                                "type": "Free Course",
+                                "link": "https://www.freecodecamp.org/news/react-native-full-course/"
+                            },
+                            {
+                                "name": "Flutter Official Layout Documentation",
+                                "type": "Official Manual",
+                                "link": "https://docs.flutter.dev/ui/layout"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 5-8",
+                        "title": "Local Database storage & Hardware API Integrations",
+                        "description": "Integrate persistent local databases (SQLite, Realm, or Hive) to cache records. Bind hardware services including GPS Location, Camera permissions, and offline state syncing.",
+                        "skills_gained": ["Local persistence (SQLite/Realm)", "Offline Data Cache", "Hardware API Integrations", "Secure Data Storage"],
+                        "suggested_actions": ["Build an offline-first journal or scanner app that writes to a local SQLite database and syncs once online", "Configure secure keystore credentials to save sensitive API tokens on the device"],
+                        "curated_resources": [
+                            {
+                                "name": "Mobile App Offline Caching Strategies",
+                                "type": "Technical Overview",
+                                "link": "https://roadmap.sh/android"
+                            },
+                            {
+                                "name": "SQLite Mobile Integration Tutorial",
+                                "type": "Guide",
+                                "link": "https://www.youtube.com/watch?v=312H_M3yFmQ"
+                            }
+                        ]
+                    },
+                    {
+                        "week_range": "Weeks 9-12",
+                        "title": "Automated Device Testing & App Store Publishing CI/CD",
+                        "description": "Implement mobile unit and UI widget tests. Configure Fastlane script automation to build, sign, and automatically publish beta and production bundles to Apple App Store and Google Play Console.",
+                        "skills_gained": ["Mobile Testing", "Fastlane Automation", "App Store Guidelines", "Mobile CI/CD Pipelines"],
+                        "suggested_actions": ["Set up automated widget integration tests to verify touch inputs and UI state reactions", "Write a Fastlane configuration file to sign binaries and upload mock release bundles to Google Play Internal Test tracks"],
+                        "curated_resources": [
+                            {
+                                "name": "Fastlane Mobile Automation Official Guide",
+                                "type": "Documentation",
+                                "link": "https://docs.fastlane.tools/"
+                            },
+                            {
+                                "name": "App Publishing Checklist - iOS & Android",
+                                "type": "Best Practice Checklist",
+                                "link": "https://roadmap.sh/flutter"
+                            }
+                        ]
+                    }
+                ]
+            }
+
+        # 7. Fallback Dynamic Synthesized
+        role_words = [w.capitalize() for w in role_lower.split(" ") if w.strip()]
+        role_title = " ".join(role_words)
+        base_role = role_title.replace("Developer", "").replace("Engineer", "").replace("Analyst", "").strip()
+        if not base_role:
+            base_role = role_title
+            
         return {
-            "target_role": target_role,
+            "target_role": role_title,
             "milestones": [
                 {
                     "week_range": "Weeks 1-4",
-                    "title": "Docker & Container Architecture",
-                    "description": "Learn to containerize Python Flask and React configurations for scalable and identical dev/prod environments.",
-                    "skills_gained": ["Docker", "Docker Compose", "Multi-stage Builds"],
-                    "suggested_actions": ["Write a Dockerfile for Flask", "Configure Docker Compose for full-stack environment locally"],
+                    "title": f"Advanced Foundations & Core Tooling in {role_title}",
+                    "description": f"Master the foundational architectural patterns, compiler settings, and development environments specifically utilized in professional {role_title} systems to ensure clean-code principles.",
+                    "skills_gained": [f"{base_role} Core Principles", "Environment Configuration", "Clean Architecture Spec"],
+                    "suggested_actions": [f"Write a standardized tool configuration for a new {base_role} project module"],
                     "curated_resources": [
                         {
-                            "name": "Docker for Beginners - freeCodeCamp",
-                            "type": "Free Course",
-                            "link": "https://www.freecodecamp.org/news/what-is-docker-used-for-a-docker-container-tutorial-for-beginners/"
+                            "name": f"{role_title} Learning Map",
+                            "type": "Interactive Guide",
+                            "link": "https://roadmap.sh"
                         }
                     ]
                 },
                 {
                     "week_range": "Weeks 5-8",
-                    "title": "Cloud Deployments & Serverless",
-                    "description": "Learn cloud hosting basics, deploying microservices to Render, and static frontend deployments to Vercel.",
-                    "skills_gained": ["Render Hosting", "Vercel Deployments", "Environment Configs"],
-                    "suggested_actions": ["Configure Render Web Service linked to GitHub", "Configure Vercel project with CLI"],
+                    "title": f"Production Workflows & Integration Patterns",
+                    "description": f"Design and implement end-to-end processing pipelines, data storage connectors, and error-resilient middleware layers tailored to {role_title} execution contexts.",
+                    "skills_gained": ["Data Processing Pipelines", "Integration Safeguards", "Error Fallback Strategies"],
+                    "suggested_actions": ["Configure connection limits and asynchronous callbacks to secure 99.9% uptime"],
                     "curated_resources": [
                         {
-                            "name": "Full Stack Cloud Deployment Guide - roadmap.sh",
-                            "type": "Interactive Tutorial",
-                            "link": "https://roadmap.sh/devops"
+                            "name": "Software Engineering Best Practices",
+                            "type": "Technical Guide",
+                            "link": "https://roadmap.sh"
                         }
                     ]
                 },
                 {
                     "week_range": "Weeks 9-12",
-                    "title": "Continuous Integration (CI/CD)",
-                    "description": "Master GitHub Actions to automate unit tests, lint checks, and automated continuous deployment workflows.",
-                    "skills_gained": ["GitHub Actions", "CI Workflows", "Automated Linting"],
-                    "suggested_actions": ["Set up .github/workflows/test.yml", "Configure webhook auto-deployments"],
+                    "title": f"Performance Auditing, Automated Tests & Release CD",
+                    "description": f"Build automated verification test suites and continuous deployment release workflows to deliver secure, optimized build outputs to staging/production.",
+                    "skills_gained": ["Unit & Integration Testing", "Automated Workflows (CI/CD)", "Performance Optimization"],
+                    "suggested_actions": ["Configure a CI/CD script that automates code formatting checks, builds the binaries, and alerts on failures"],
                     "curated_resources": [
                         {
-                            "name": "GitHub Actions Official Guide",
-                            "type": "Documentation",
-                            "link": "https://docs.github.com/en/actions"
+                            "name": "DevOps Automation and Deployment",
+                            "type": "Best Practice Guide",
+                            "link": "https://roadmap.sh"
                         }
                     ]
                 }
